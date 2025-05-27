@@ -10,7 +10,7 @@ export default function MoveToDetail(){
                 <Stack.Navigator initialRouteName="Homescreen">
                 <Stack.Screen name="Homescreen" component={Homescreen} />
                 <Stack.Screen name="Aggiungi Modifica Libro" component={AddEdit} />
-                
+                <Stack.Screen name="Dettaglio" component={BookDetails} />
                 </Stack.Navigator>
 
         );

@@ -106,13 +106,13 @@ const suggestedBooks = [//vettore da passare alla flat list dei libri suggeriti
       },
   // altri...
 ];
-/*
+
 type BookComponentProps = {
   title: string;
   author: string;
   imageSource: ImageSourcePropType;
   status: 'Letto' | 'In lettura' | 'Da leggere';
-};*/
+};
 
 //componente che rappresenta il singolo libro nella pagina
 const BookComponent = ({ title, author, imageSource, status }: BookComponentProps) => {
