@@ -1,32 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, imageSourcePropType, FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import styleHomeScreen from './styles/styleHomeScreen';
-import { salvaLibri, caricaLibri } from './fileStorage';
 
 export default function Homescreen({navigation}) {
 
   const [libri, setLibri] = useState([]);
-
   useEffect(() => {
-      // Carica i libri al montaggio del componente
-      const loadData = async () => {
-        const data = await caricaLibri();
-        setLibri(data);
-      };
-      loadData();
-    }, []);
 
-    const aggiungiLibro = async () => {
-        const nuovoLibro = {
-          id: Date.now().toString(),
-          titolo: 'Nuovo Libro',
-          autore: 'Autore Esempio',
-          stato: 'Da leggere',
-        };
-        const nuoviLibri = [...libri, nuovoLibro];
-        setLibri(nuoviLibri);
-        await salvaLibri(nuoviLibri);
-      };
 
     return (
         <View style={styleHomeScreen.container}>
@@ -53,7 +32,6 @@ export default function Homescreen({navigation}) {
               <BookSuggestion
                 title={item.title}
                 author={item.author}
-                imageSource={item.immagine}
               />
             )}
             showsHorizontalScrollIndicator={false}
@@ -66,7 +44,6 @@ export default function Homescreen({navigation}) {
       </View>
       );
 }
-
 
 
 const suggestedBooks = [//vettore da passare alla flat list dei libri suggeriti
@@ -96,13 +73,11 @@ const suggestedBooks = [//vettore da passare alla flat list dei libri suggeriti
       },
   // altri...
 ];
-
 type BookComponentProps = {
   title: string;
   author: string;
   imageSource: ImageSourcePropType;
   status: 'Letto' | 'In lettura' | 'Da leggere';
-};
 
 //componente che rappresenta il singolo libro nella pagina
 const BookComponent = ({ title, author, imageSource, status }: BookComponentProps) => {
