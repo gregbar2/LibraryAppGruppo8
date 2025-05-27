@@ -1,5 +1,6 @@
 import AddEdit from './addEdit.js';
 import Homescreen from './homescreen.js';
+import BookDetails from './bookDetails.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -10,7 +11,7 @@ export default function MoveToDetail(){
                 <Stack.Navigator initialRouteName="Homescreen">
                 <Stack.Screen name="Homescreen" component={Homescreen} />
                 <Stack.Screen name="Aggiungi Modifica Libro" component={AddEdit} />
-                
+                <Stack.Screen name="Dettaglio" component={BookDetails} />
                 </Stack.Navigator>
 
         );
