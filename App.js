@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MoveToDetail from './src/moveToDetail.js';
 import AddEdit from './src/addEdit.js';
-import BookDetails from './src/bookDetails.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 

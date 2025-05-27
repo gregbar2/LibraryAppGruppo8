@@ -1,45 +1,31 @@
+import styleHomeScreen from './styles/styleHomeScreen';
 import { StyleSheet, Text, View, TouchableOpacity, Image, /*imageSourcePropType,*/ FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import styleHomeScreen from './styles/styleHomeScreen';
-//import { setupDatabase, caricaLibri } from './database'; //importa il DB
-
 export default function Homescreen({navigation}) {
 
   const [libri, setLibri] = useState([]);
   const [suggeriti, setSuggeriti] = useState([]);
-/*
- useEffect(() => {
-    setupDatabase();
-
-    caricaLibri(libriDalDB => {
-      setLibri(libriDalDB);
-
-      // seleziona 3 casuali per suggerimenti
-      const mescolati = [...libriDalDB].sort(() => 0.5 - Math.random());
-      setSuggeriti(mescolati.slice(0, 3));
-    });
-  }, []);*/
+  
 
 
+  return (
+    <View style={styleHomeScreen.container}>
+    <Text style={styleHomeScreen.title}>Libreria Personale</Text>
+    <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
+      <View>
+        {libri.slice(0, 1).map(libro => (
+                 <BookComponent
+                   key={libro.id}
+                   title={libro.titolo}
+                   author={libro.autore}
+                   status={libro.stato}
+                   imageSource={getImage(libro.immagine)}
+                 />
+               ))}
+      </View>
+    <Text style={styleHomeScreen.sectionTitle}>Suggerimenti casuali</Text>
 
-    return (
-        <View style={styleHomeScreen.container}>
-        <Text style={styleHomeScreen.title}>Libreria Personale</Text>
-        <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
-          <View>
-            {libri.slice(0, 1).map(libro => (
-                     <BookComponent
-                       key={libro.id}
-                       title={libro.titolo}
-                       author={libro.autore}
-                       status={libro.stato}
-                       imageSource={getImage(libro.immagine)}
-                     />
-                   ))}
-          </View>
-        <Text style={styleHomeScreen.sectionTitle}>Suggerimenti casuali</Text>
-
-          <FlatList //flat list per contenere orizzontalmente i libri suggeriti
+    <FlatList //flat list per contenere orizzontalmente i libri suggeriti
             data={suggestedBooks}
             horizontal
             keyExtractor={(item) => item.id}
@@ -60,11 +46,10 @@ export default function Homescreen({navigation}) {
       </View>
       );
 }
-
 /*La funzione getImage(nome) che ti ho proposto serve a convertire il
  nome del file immagine salvato nel database (es. '1984.jpg') in un riferimento
  statico con require() che React Native possa usare per mostrare immagini locali.*/
-const getImage = (nome) => {
+ const getImage = (nome) => {
   switch (nome) {
     case '1984.jpg':
       return require('../assets/1984.jpg');
@@ -106,7 +91,6 @@ const suggestedBooks = [//vettore da passare alla flat list dei libri suggeriti
       },
   // altri...
 ];
-
 type BookComponentProps = {
   title: string;
   author: string;
