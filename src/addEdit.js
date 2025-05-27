@@ -11,27 +11,27 @@ export default function AddEdit({ navigation }) {
   const [titolo, setTitolo] = useState('');
   const [autore, setAutore] = useState('');
   const [trama, setTrama] = useState('');
-  const [stato, setStato] = useState('Da leggere'); // valore di default
+  const [stato, setStato] = useState('Da leggere'); /* valore di default */
   const [genere, setGenere] = useState('');
-
-  // Funzione chiamata al salvataggio
+  const [img,setImg] = useState(null);
+  /* Funzione chiamata al salvataggio */
 const salvaLibro = async () => {
   try {
-    // Carica la lista libri già salvata (se presente)
+    /* Carica la lista libri già salvata (se presente) */
     const libriSalvati = await caricaLibri();
 
-    // Crea il nuovo libro con i dati dallo stato
+    /* Crea il nuovo libro con i dati dallo stato */
     const nuovoLibro = { titolo, autore, trama, stato, genere, id: Date.now().toString() };
 
-    // Aggiungi il nuovo libro alla lista esistente
+    /* Aggiungi il nuovo libro alla lista esistente*/
     const nuoviLibri = [...libriSalvati, nuovoLibro];
 
-    // Salva la lista aggiornata su file
+    /* Salva la lista aggiornata su file*/
     await salvaLibri(nuoviLibri);
 
     console.log('Libro salvato con successo:', nuovoLibro);
 
-    // Eventualmente, puoi navigare indietro o resettare il form qui
+    /* Eventualmente, puoi navigare indietro o resettare il form qui*/
      navigation.goBack();
   } catch (error) {
     console.error('Errore nel salvataggio del libro:', error);
@@ -39,20 +39,14 @@ const salvaLibro = async () => {
 
 };
   const controlloInserimenti = () => {
-      if(titolo != '' && autore != '' && trama != '' && genere != ''){
+      if(titolo != '' && autore != '' && trama != '' && genere != '' && img != null){
+        console.log(img);
         return true;
       }else{
         Alert.alert('ATTENZIONE!!', 'Popolare tutti i campi');
         return false;
       }
-/*
-const [titolo, setTitolo] = useState('');
-  const [autore, setAutore] = useState('');
-  const [trama, setTrama] = useState('');
-  const [stato, setStato] = useState('Da leggere'); // valore di default
-  const [genere, setGenere] = useState('');      
-*/
-    // deve ritornare TRUE/FALSE
+      
   };
 
   return (
@@ -83,8 +77,8 @@ const [titolo, setTitolo] = useState('');
       />
 
       <Text style={styleAddEditBook.label}>Copertina</Text>
-      <ImagePickerComponent />
-
+      <ImagePickerComponent onImagePicked={(uri) => setImg(uri)} /> 
+{/* noi creiamo il componente imagePicker in addEdit e associamo questa funzione anonima che viene eseguita ogni volta da imagePickerComponent all'interno dell' IF che salva lo stato */}
       <Text style={styleAddEditBook.label}>Stato</Text>
       <Picker
         style={styleAddEditBook.picker}
@@ -106,7 +100,7 @@ const [titolo, setTitolo] = useState('');
       />
 
       <TouchableOpacity style={styleAddEditBook.saveButton} onPress={() => {if(controlloInserimenti()){salvaLibro();}}}>
-        <Text style={styleAddEditBook.saveButtonText}>Salva</Text>//tasto per salvare il libro aggiunto
+        <Text style={styleAddEditBook.saveButtonText}>Salva</Text>
       </TouchableOpacity>
 
     </ScrollView>
