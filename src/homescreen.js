@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styleHomeScreen from './styles/styleHomeScreen';
 import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+import { useFocusEffect } from '@react-navigation/native';
 
 
 export default function Homescreen({ navigation }) {
   const [libri, setLibri] = useState([]);
 
-  useEffect(() => {//carico i libri al primo avvio
-    const loadData = async () => {
-        const data = await caricaLibri();
-        setLibri(data);
-      };
-      loadData();
-  }, []);
-
-/*
-  const aggiungiLibro = async () => {
-    const nuovoLibro = {
-      id: Date.now().toString(),
-      titolo: '1984',
-      autore: 'George Orwell',
-      stato: 'In lettura',
-      immagine: '1984.jpg'
+   const loadData = async () => {
+      const data = await caricaLibri();
+      setLibri(data);
     };
-     const nuoviLibri = [...libri, nuovoLibro];
-      setLibri(nuoviLibri);
-      await salvaLibri(nuoviLibri);
-   };*/
+
+   useFocusEffect(
+     useCallback(() => {
+       const loadData = async () => {
+         const data = await caricaLibri();
+         setLibri(data);
+       };
+       loadData();
+     }, [])
+   );
 
   return (
     <ScrollView contentContainerStyle={styleHomeScreen.container}>
