@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import ImagePickerComponent from './imagePickerComponent.js';
 import styleAddEditBook from './styles/styleAddEdit';
 import { salvaLibri, caricaLibri } from './fileStorage';
-
+import { Alert } from 'react-native';
 
 export default function AddEdit({ navigation }) {
   // Stati per i campi del form
@@ -38,6 +38,22 @@ const salvaLibro = async () => {
   }
 
 };
+  const controlloInserimenti = () => {
+      if(titolo != '' && autore != '' && trama != '' && genere != ''){
+        return true;
+      }else{
+        Alert.alert('ATTENZIONE!!', 'Popolare tutti i campi');
+        return false;
+      }
+/*
+const [titolo, setTitolo] = useState('');
+  const [autore, setAutore] = useState('');
+  const [trama, setTrama] = useState('');
+  const [stato, setStato] = useState('Da leggere'); // valore di default
+  const [genere, setGenere] = useState('');      
+*/
+    // deve ritornare TRUE/FALSE
+  };
 
   return (
     <ScrollView style={styleAddEditBook.container}>
@@ -88,7 +104,7 @@ const salvaLibro = async () => {
         onChangeText={setGenere}
       />
 
-      <TouchableOpacity style={styleAddEditBook.saveButton} onPress={salvaLibro}>
+      <TouchableOpacity style={styleAddEditBook.saveButton} onPress={() => {if(controlloInserimenti()){salvaLibro();}}}>
         <Text style={styleAddEditBook.saveButtonText}>Salva</Text>
       </TouchableOpacity>
     </ScrollView>
