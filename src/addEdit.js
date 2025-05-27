@@ -57,6 +57,7 @@ const [titolo, setTitolo] = useState('');
 
   return (
     <ScrollView style={styleAddEditBook.container}>
+
       <Text style={styleAddEditBook.firstLabel}>Titolo</Text>
       <TextInput
         placeholder='Inserisci titolo'
@@ -98,15 +99,16 @@ const [titolo, setTitolo] = useState('');
 
       <Text style={styleAddEditBook.label}>Genere</Text>
       <TextInput
-        placeholder='Inserisci genere'
-        style={styleAddEditBook.input}
-        value={genere}
-        onChangeText={setGenere}
+            placeholder='Inserisci genere'
+            style={styleAddEditBook.input}
+            value={genere}
+            onChangeText={setGenere}
       />
 
       <TouchableOpacity style={styleAddEditBook.saveButton} onPress={() => {if(controlloInserimenti()){salvaLibro();}}}>
-        <Text style={styleAddEditBook.saveButtonText}>Salva</Text>
+        <Text style={styleAddEditBook.saveButtonText}>Salva</Text>//tasto per salvare il libro aggiunto
       </TouchableOpacity>
+
     </ScrollView>
   );
 }
