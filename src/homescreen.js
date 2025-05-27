@@ -1,54 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styleHomeScreen from './styles/styleHomeScreen';
+import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+
 
 export default function Homescreen({ navigation }) {
   const [libri, setLibri] = useState([]);
 
-  useEffect(() => {
-    // carica dati se necessario
-    setLibri([]); // o carica da file
+  useEffect(() => {//carico i libri al primo avvio
+    const loadData = async () => {
+        const data = await caricaLibri();
+        setLibri(data);
+      };
+      loadData();
   }, []);
 
+/*
+  const aggiungiLibro = async () => {
+    const nuovoLibro = {
+      id: Date.now().toString(),
+      titolo: '1984',
+      autore: 'George Orwell',
+      stato: 'In lettura',
+      immagine: '1984.jpg'
+    };
+     const nuoviLibri = [...libri, nuovoLibro];
+      setLibri(nuoviLibri);
+      await salvaLibri(nuoviLibri);
+   };*/
+
   return (
-    <View style={styleHomeScreen.container}>
+    <ScrollView contentContainerStyle={styleHomeScreen.container}>
       <Text style={styleHomeScreen.title}>Libreria Personale</Text>
       <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
 
       <View>
-        {libri.slice(0, 1).map(libro => (
-          <BookComponent
-            key={libro.id}
-            title={libro.titolo}
-            author={libro.autore}
-            status={libro.stato}
-            imageSource={getImage(libro.immagine)}
-          />
-        ))}
+         {libri.map((item) => (
+                  <BookComponent
+                    key={item.id}
+                    title={item.titolo}
+                    author={item.autore}
+                    status={item.stato}
+                    imageSource={getImage(item.immagine)}
+                  />
+                ))}
       </View>
 
       <Text style={styleHomeScreen.sectionTitle}>Suggerimenti casuali</Text>
-      <FlatList
-        data={suggestedBooks}
-        horizontal
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <BookSuggestion
-            title={item.title}
-            author={item.author}
-            imageSource={item.imageSource}
-          />
-        )}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styleHomeScreen.suggestionList}
-      />
 
-      <TouchableOpacity style={styleHomeScreen.addButton}>
-        <Text style={styleHomeScreen.addButtonText}>+ Aggiungi nuovo libro</Text>
+       <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styleHomeScreen.suggestionList}
+       >
+
+
+       {suggestedBooks.map((item) => (
+                <BookSuggestion
+                  key={item.id}
+                  title={item.title}
+                  author={item.author}
+                  imageSource={item.imageSource}
+                />
+              ))}
+       </ScrollView>
+
+
+
+
+      <TouchableOpacity onPress={()=>navigation.navigate('Aggiungi Modifica Libro')} style={styleHomeScreen.addButton}>
+        <Text style={styleHomeScreen.addButtonText} >+ Aggiungi nuovo libro</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
+
+
+
+
 
 const suggestedBooks = [
   {
