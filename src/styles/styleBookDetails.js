@@ -87,6 +87,12 @@ const styleBookDetail = StyleSheet.create({
       height: 24,
       tintColor: 'black', // cosi elimina la scritta
     },
+    ratingInput: {
+        height: 40,
+        fontSize: 16,
+        color: '#333',
+        backgroundColor: '#fff'
+      }
   });
 
   export default styleBookDetail;

@@ -13,6 +13,7 @@ export default function MoveToDetails(){
                 <Stack.Screen name="Modifica Libro" component={AddEdit} />
                 <Stack.Screen name="Aggiungi Libro" component={AddEdit} />
                 <Stack.Screen name="Dettaglio" component={BookDetails} />
+
                 </Stack.Navigator>
 
         );
