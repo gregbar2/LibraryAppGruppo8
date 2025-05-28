@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity,Image } from 'react-native';
 import MoveToDetails from './src/moveToDetails.js';
 import AddEdit from './src/addEdit.js';
+import Categories from './src/categories.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -31,6 +32,15 @@ export default function App() {
       <Tab.Screen name="---" component={AddEdit} options={{tabBarIcon: ({ focused }) => (
             <Image
               source={require('./assets/tabIcon/searchIcon.png')}
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+          ) }}/>
+          <Tab.Screen name="Categorie" component={Categories} options={{tabBarIcon: ({ focused }) => (
+            <Image
+              source={require('./assets/tabIcon/catIcon.png')}
               style={{
                 width: 30,
                 height: 30,
