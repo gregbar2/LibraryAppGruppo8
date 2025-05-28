@@ -28,11 +28,11 @@
       return (
       
               <View style={styleBookDetail.container}>
-                      <Text style={styleBookDetail.title}>{book.titolo}</Text> 
+                      <Text style={styleBookDetail.title}>{book.title}</Text>
                       {/*Stile del titolo*/}
-                      <Text style={styleBookDetail.author}>{book.autore}</Text> 
+                      <Text style={styleBookDetail.author}>{book.author}</Text>
                       {/*Stile del nome dell'autore*/}
-                      <Image source={getImage(book.immagine)} style={styleBookDetail.coverImage} /> 
+                      <Image source={getImage(book.image)} style={styleBookDetail.coverImage} />
                       {/*Stile della copertina del libro*/}
 
                       <Text style={styleBookDetail.sectionTitle}>Trama</Text>
@@ -40,7 +40,7 @@
                       {/*Stile della trama*/}
           
                       <Text style={styleBookDetail.sectionTitle}>Stato</Text>
-                      <Text style={styleBookDetail.status}>{book.stato || 'Nessuno stato disponibile'}</Text> 
+                      <Text style={styleBookDetail.status}>{book.status || 'Nessuno stato disponibile'}</Text>
                       {/*Stile dello stato*/}
                         
                         

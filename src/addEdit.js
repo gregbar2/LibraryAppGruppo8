@@ -8,11 +8,11 @@ import { Alert } from 'react-native';
 
 export default function AddEdit({ navigation }) {
   // Stati per i campi del form
-  const [titolo, setTitolo] = useState('');
-  const [autore, setAutore] = useState('');
-  const [trama, setTrama] = useState('');
-  const [stato, setStato] = useState('Da leggere'); /* valore di default */
-  const [genere, setGenere] = useState('');
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState('Da leggere'); /* valore di default */
+  const [type, setType] = useState('');
   const [img,setImg] = useState(null);
   /* Funzione chiamata al salvataggio */
 const salvaLibro = async () => {
@@ -21,7 +21,7 @@ const salvaLibro = async () => {
     const libriSalvati = await caricaLibri();
 
     /* Crea il nuovo libro con i dati dallo stato */
-    const nuovoLibro = { titolo, autore, trama, stato, genere, id: Date.now().toString() };
+    const nuovoLibro = { title, author, description, status, type, id: Date.now().toString() };
 
     /* Aggiungi il nuovo libro alla lista esistente*/
     const nuoviLibri = [...libriSalvati, nuovoLibro];
@@ -39,7 +39,7 @@ const salvaLibro = async () => {
 
 };
   const controlloInserimenti = () => {
-      if(titolo != '' && autore != '' && trama != '' && genere != '' && img != null){
+      if(title != '' && author != '' && description != '' && type != '' && img != null){
         console.log(img);
         return true;
       }else{
@@ -56,24 +56,24 @@ const salvaLibro = async () => {
       <TextInput
         placeholder='Inserisci titolo'
         style={styleAddEditBook.input}
-        value={titolo}
-        onChangeText={setTitolo}
+        value={title}
+        onChangeText={setTitle}
       />
 
       <Text style={styleAddEditBook.label}>Autore</Text>
       <TextInput
         placeholder='Inserisci autore'
         style={styleAddEditBook.input}
-        value={autore}
-        onChangeText={setAutore}
+        value={author}
+        onChangeText={setAuthor}
       />
 
       <Text style={styleAddEditBook.label}>Trama</Text>
       <TextInput
         placeholder='Inserisci trama'
         style={styleAddEditBook.input}
-        value={trama}
-        onChangeText={setTrama}
+        value={description}
+        onChangeText={setDescription}
       />
 
       <Text style={styleAddEditBook.label}>Copertina</Text>
@@ -82,8 +82,8 @@ const salvaLibro = async () => {
       <Text style={styleAddEditBook.label}>Stato</Text>
       <Picker
         style={styleAddEditBook.picker}
-        selectedValue={stato}
-        onValueChange={(itemValue) => setStato(itemValue)}
+        selectedValue={status}
+        onValueChange={(itemValue) => setStatus(itemValue)}
       >
         <Picker.Item label='Da leggere' value='Da leggere' />
         <Picker.Item label='Letto' value='Letto' />
@@ -95,8 +95,8 @@ const salvaLibro = async () => {
       <TextInput
             placeholder='Inserisci genere'
             style={styleAddEditBook.input}
-            value={genere}
-            onChangeText={setGenere}
+            value={type}
+            onChangeText={setType}
       />
 
       <TouchableOpacity style={styleAddEditBook.saveButton} onPress={() => {if(controlloInserimenti()){salvaLibro();}}}>
