@@ -7,9 +7,13 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function Homescreen({ navigation }) {
   const [libri, setLibri] = useState([]);
+  /*INUTILE PERCHè GIA DEFINITA IN useFocusEffect
+  const loadData = async () => { 
+    const data = await caricaLibri();
+    setLibri(data);
+  };*/
 
-
-   useFocusEffect(
+   useFocusEffect(/* viene eseguita quando torni dalla pagina AddEdit */
      useCallback(() => {
        const loadData = async () => {
          const data = await caricaLibri();

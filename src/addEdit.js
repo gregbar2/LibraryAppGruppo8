@@ -14,10 +14,6 @@ export default function AddEdit({ navigation }) {
   const [status, setStatus] = useState('Da leggere'); /* valore di default */
   const [type, setType] = useState('');
   const [img,setImg] = useState(null);
-
-  /*Inizializzo temporaneamente le proprietà del libro che vengono popolate solo nella schermata di dettaglio*/
-  const rating = 0;
-  const notes = '';
   /* Funzione chiamata al salvataggio */
 const salvaLibro = async () => {
   try {
@@ -25,7 +21,7 @@ const salvaLibro = async () => {
     const libriSalvati = await caricaLibri();
 
     /* Crea il nuovo libro con i dati dallo stato */
-    const nuovoLibro = { title, author, description, status, type, id: Date.now().toString(), rating, notes};
+    const nuovoLibro = { title, author, description, status, type, id: Date.now().toString()};
 
     /* Aggiungi il nuovo libro alla lista esistente*/
     const nuoviLibri = [...libriSalvati, nuovoLibro];
