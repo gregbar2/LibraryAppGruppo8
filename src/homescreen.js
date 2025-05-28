@@ -25,9 +25,10 @@ export default function Homescreen({ navigation }) {
       <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
 
 
-    {/*libri.slice serve a far visualizzare solo gli utlimi 5 libri aggiunti*/}
+    {/*libri.slice serve a far visualizzare solo gli utlimi 5 libri aggiunti.*/}
+    {/*faccio reverse() perchè così riesco a visualizzare i libri dal piu recente al meno recente*/}
       <View>
-         {libri.slice(0, 5).map((item) => (
+         {libri.slice(-5).reverse().map((item) => (
              <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
 
                       <BookComponent
