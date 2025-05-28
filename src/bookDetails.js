@@ -1,8 +1,7 @@
-  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
+  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
   import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
   import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
-
 
   export default function BookDetails({route, navigation}) {
 
@@ -18,6 +17,7 @@
       }
 
       const [notes, setNotes] = useState(book.notes);
+      const [rating, setRating] = useState(book.rating);
       const [libri, setLibri] = useState([]);
 
         useEffect(() => {
@@ -44,6 +44,7 @@
                 if (l.id.toString() === book.id.toString()) {
                   console.log('Aggiornamento libro con id: ${l.id}');
                   l.notes=notes;
+                  l.rating=rating;
                   updatedLibri.push(l);
                 } else {
                   updatedLibri.push(l);
@@ -64,7 +65,7 @@
           };
 
           saveData();
-        }, [notes]);
+        }, [notes, rating]);
 
 
 
@@ -101,7 +102,19 @@
                         
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
                       <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{book.rating ? '★'.repeat(book.rating) : 'Nessuna valutazione'}</Text>
-
+                       <TextInput
+                            value={rating}
+                             onChangeText={text => {
+                                const num = parseInt(text);
+                                if (!isNaN(num) && num >= 0 && num <= 5) {
+                                  setRating(num);
+                                }else {
+                                  Alert.alert('Valore non valido', 'Inserisci un numero compreso tra 1 e 5');
+                                  setRating(0);  // resetta rating a 0
+                                }
+                              }}
+                            placeholder="Scrivi un numero tra 1 e 5..."
+                       />
 
                       <Text style={styleBookDetail.sectionTitle}>Note</Text>
                       <Text style={styleBookDetail.noteBox}>{notes}</Text>
