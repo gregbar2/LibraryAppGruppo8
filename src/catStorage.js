@@ -27,7 +27,7 @@ export const caricaCategorie = async () => {
   }
 };
 
-export const eliminaCategorie = async () => {
+export const eliminaCategorie = async () => { /* pagina impostazioni per eliminare categorie e libri */
     try {
       await FileSystem.writeAsStringAsync(FILE_URI, '[]'); // un array vuoto come JSON
       console.log('Categorie svuotate con successo');

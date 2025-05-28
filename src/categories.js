@@ -17,32 +17,25 @@ const CategoryItem = ({genere,number}) => {
 }
 
 export default function Categories(){
-    const [libri, setLibri] = useState([]);
-    const [categorie, setCategorie] = useState([]);
-    const [newGenere,setNewGenere] = useState('');
+    const [libri, setLibri] = useState([]); //vettore di libri per poter calcolare il numero di libri per categoria
+    const [categorie, setCategorie] = useState([]); //vettore di tutte le categorie/generi 
+    const [newGenere,setNewGenere] = useState(''); //nuovo genere appena inserito
     const [visible, setVisible] = useState(false); // mostra/nasconde il dialog
 
-    useFocusEffect(/* viene eseguita quando torni dalla pagina AddEdit */
+    useFocusEffect(/* viene eseguito ogni volta che da una pagina torniamo qui */
         useCallback(() => {
           const loadData = async () => {
             const data = await caricaLibri();
+            const data2 = await caricaCategorie();
             setLibri(data);
+            setCategorie(data2);
           };
           loadData();
         }, [])
       );
 
-    useFocusEffect(/* viene eseguita quando torni dalla pagina AddEdit */
-    useCallback(() => {
-        const loadData = async () => {
-        const data = await caricaCategorie();
-        setCategorie(data);
-        };
-        loadData();
-    }, [])
-    );
 
-    const contaLibriGenere = (genere) => {
+    const contaLibriGenere = (genere) => { //conto il numero di libri per genere
         let count=0;
         for(let i=0;i<libri.length;i++){
             if(libri[i].type === genere){
@@ -53,34 +46,33 @@ export default function Categories(){
         return count;
     }
     
-    const handleCancel = () => {
-        setVisible(false);
-        setNewGenere('');
-        eliminaCategorie();
+    const handleCancel = () => { /* annulla l'operazione di inserimento */
+        setVisible(false); //nascondo il Dialog
+        setNewGenere(''); //svuoto il textInput
       };
       
-      const handleAdd = async () => {
+      const handleAdd = async () => { /* quando clicco sul bottone 'Aggiungi' del Dialog aggiunge il Genere nel file e nel vettore degli stati per poi nostrare un nuovo categoryItem */
         try {
-            /* Carica la lista libri già salvata (se presente) */
+            /* Carica la lista di categorie già salvata (se presente) */
             const catSalvate = await caricaCategorie();
         
-            /* Crea il nuovo libro con i dati dallo stato */
+            /* Crea la nuova categoria con i dati dallo stato */
             const nuovaCat = {newGenere }; //popola
         
-            /* Aggiungi il nuovo libro alla lista esistente */
+            /* Aggiunge la nuova categoria alla lista esistente */
             const nuoveCat = [...catSalvate, nuovaCat];
         
             /* Salva la lista aggiornata su file*/
             await salvaCategorie(nuoveCat);
         
-            console.log('Libro salvato con successo:', nuoveCat);
-            setCategorie(nuoveCat);
+            console.log('Categoria salvata con successo:', nuovaCat);
+            setCategorie(nuoveCat); // necessaria perchè quando aggiungo una categoria e sto già nella pagina non viene aggiornato il vettore
             setVisible(false);
-            setNewGenere('');
+            setNewGenere(''); //svuoto il TextInput
         } catch (error) {
             console.error('Errore nel salvataggio del libro:', error);
             setVisible(false);
-            setNewGenere('');
+            setNewGenere('');//svuoto il TextInput
         }
       };
     
@@ -108,8 +100,8 @@ export default function Categories(){
 
         </View>
         <View style={styleCategories.list} >
-        {categorie.map((cat, index) => (
-          <CategoryItem key={index} genere={cat.newGenere} number={() => contaLibriGenere(cat.newGenere)} />
+        {categorie.map((cat, index) => (/* .map è una funzione che itera su ogni elemento dell'array categorie e restituisce un nuovo array di elementi React (in questo caso, CategoryItem). */
+          <CategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.newGenere} number={() => contaLibriGenere(cat.newGenere)} />
         ))}
         </View>
         </ScrollView>
