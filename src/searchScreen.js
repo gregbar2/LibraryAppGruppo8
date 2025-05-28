@@ -96,7 +96,7 @@ export default function SearchScreen() {
         renderItem={({ item }) => (
           <View style={styleSearchScreen.bookItem}>
             <Image
-              source={item.img ? { uri: item.img } : require('../assets/prince.jpg')}
+              source={item.img ? { uri: item.img } : require('../assets/default.jpg')}
               style={styleSearchScreen.bookCover}
             />
             <View>
