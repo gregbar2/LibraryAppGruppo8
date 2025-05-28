@@ -42,7 +42,6 @@
               for (let i = 0; i < libriCorrenti.length; i++) {
                 const l = libriCorrenti[i];
                 if (l.id.toString() === book.id.toString()) {
-                  console.log('Aggiornamento libro con id: ${l.id}');
                   l.notes=notes;
                   l.rating=rating;
                   updatedLibri.push(l);
@@ -57,7 +56,6 @@
               // Aggiorna lo stato locale
               setLibri(updatedLibri);
 
-              console.log('Lista aggiornata salvata:', updatedLibri);
 
             } catch (e) {
               Alert.alert('Errore nel salvataggio', e.message);
@@ -103,25 +101,27 @@
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
                       <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{book.rating ? '★'.repeat(book.rating) : 'Nessuna valutazione'}</Text>
                        <TextInput
-                            value={rating}
+                             value={rating.toString()}
+                             keyboardType="numeric"
                              onChangeText={text => {
                                 const num = parseInt(text);
                                 if (!isNaN(num) && num >= 0 && num <= 5) {
                                   setRating(num);
+                                }else  if (text === '') {
+                                  setRating('');
                                 }else {
                                   Alert.alert('Valore non valido', 'Inserisci un numero compreso tra 1 e 5');
-                                  setRating(0);  // resetta rating a 0
+                                  setTimeout(() => {
+                                          setRating('');  // svuota il campo
+                                        }, 100);
                                 }
                               }}
                             placeholder="Scrivi un numero tra 1 e 5..."
                        />
 
                       <Text style={styleBookDetail.sectionTitle}>Note</Text>
-                      <Text style={styleBookDetail.noteBox}>{notes}</Text>
                       {/*Stile delle note*/}
                       <TextInput
-                        multiline
-                        style={{ height: 100, borderColor: 'gray', borderWidth: 1, padding: 8 }}
                         value={notes}
                         onChangeText={setNotes}
                         placeholder="Scrivi una nota..."
