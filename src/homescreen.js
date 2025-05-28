@@ -29,9 +29,9 @@ export default function Homescreen({ navigation }) {
       <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
 
 
-
+    {/*libri.slice serve a far visualizzare solo gli utlimi 5 libri aggiunti*/}
       <View>
-         {libri.map((item) => (
+         {libri.slice(0, 5).map((item) => (
              <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
 
                       <BookComponent
@@ -105,21 +105,13 @@ const suggestedBooks = [
   }
 ];
 
-/*const getImage = (nome) => {
-  switch (nome) {
-    case '1984.jpg': return require('../assets/1984.jpg');
-    case 'OrgoglioPregiudizio.jpg': return require('../assets/OrgoglioPregiudizio.jpg');
-    case 'prince.jpg': return require('../assets/prince.jpg');
-    default: return require('../assets/prince.jpg');
-  }
-};*/
 
 const BookComponent = ({ title, author, imageSource, status }) => {
   return (
     <View style={styleHomeScreen.bookItem}>
       <Image source={imageSource 
       ? { uri: imageSource } 
-      : require('../assets/prince.jpg')} style={styleHomeScreen.bookImage} />
+      : require('../assets/default.jpg')} style={styleHomeScreen.bookImage} />
       <View style={styleHomeScreen.bookTextContainer}>
         <Text style={styleHomeScreen.bookTitle}>{title}</Text>
         <Text style={styleHomeScreen.bookAuthor}>{author}</Text>
@@ -134,7 +126,7 @@ const BookSuggestion = ({ title, author, imageSource }) => {
     <View style={styleHomeScreen.suggestionItem}>
       <Image source={imageSource 
       ? { uri: imageSource } 
-      : require('../assets/prince.jpg') } style={styleHomeScreen.suggestionImage} />
+      : require('../assets/default.jpg') } style={styleHomeScreen.suggestionImage} />
       <Text style={styleHomeScreen.suggestionTitle} numberOfLines={1}>{title}</Text>
       <Text style={styleHomeScreen.suggestionAuthor} numberOfLines={1}>{author}</Text>
     </View>
