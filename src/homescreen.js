@@ -30,13 +30,15 @@ export default function Homescreen({ navigation }) {
 
       <View>
          {libri.map((item) => (
+         <TouchableOpacity onPress={()=>navigation.navigate("Dettaglio")}>
                   <BookComponent
                     key={item.id}
-                    title={item.titolo}
-                    author={item.autore}
-                    status={item.stato}
-                    imageSource={getImage(item.immagine)}
+                    title={item.title}
+                    author={item.author}
+                    status={item.status}
+                    imageSource={getImage(item.coverImage)}
                   />
+          </TouchableOpacity>
                 ))}
       </View>
 
