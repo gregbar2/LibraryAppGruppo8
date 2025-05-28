@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Alert, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 /* Platform serve per verificare se il dispositivo collegato è ANDROID o IOS  */
-export default function ImagePickerComponent() {
+export default function ImagePickerComponent({onImagePicked }) {
   const [imageUri, setImageUri] = useState(null);
 
   useEffect(() => { /* viene eseguito una sola volta all'avvio dell'app e richiede l'accesso alla galleria al dispositivo */
@@ -27,6 +27,7 @@ export default function ImagePickerComponent() {
 
       if (!result.canceled) { /* se non annullo l'operazione salvo nello stato l'uri dell'img */
         setImageUri(result.assets[0].uri); // Salva il percorso URI dell'immagine
+        onImagePicked(result.assets[0].uri); // passo ad addEdit l'url che si salverà nella sua variabile di stato img
       }
     } catch (error) {
       console.error('Errore nella selezione dell\'immagine:', error);

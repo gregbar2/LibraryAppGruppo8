@@ -4,40 +4,50 @@ import { Picker } from '@react-native-picker/picker';
 import ImagePickerComponent from './imagePickerComponent.js';
 import styleAddEditBook from './styles/styleAddEdit';
 import { salvaLibri, caricaLibri } from './fileStorage';
-
+import { Alert } from 'react-native';
 
 export default function AddEdit({ navigation }) {
   // Stati per i campi del form
   const [titolo, setTitolo] = useState('');
   const [autore, setAutore] = useState('');
   const [trama, setTrama] = useState('');
-  const [stato, setStato] = useState('Da leggere'); // valore di default
+  const [stato, setStato] = useState('Da leggere'); /* valore di default */
   const [genere, setGenere] = useState('');
-
-  // Funzione chiamata al salvataggio
+  const [img,setImg] = useState(null);
+  /* Funzione chiamata al salvataggio */
 const salvaLibro = async () => {
   try {
-    // Carica la lista libri già salvata (se presente)
+    /* Carica la lista libri già salvata (se presente) */
     const libriSalvati = await caricaLibri();
 
-    // Crea il nuovo libro con i dati dallo stato
-    const nuovoLibro = { title, author, description, status, genere, id: Date.now().toString() };
+    /* Crea il nuovo libro con i dati dallo stato */
+    const nuovoLibro = { titolo, autore, trama, stato, genere, id: Date.now().toString() };
 
-    // Aggiungi il nuovo libro alla lista esistente
+    /* Aggiungi il nuovo libro alla lista esistente*/
     const nuoviLibri = [...libriSalvati, nuovoLibro];
 
-    // Salva la lista aggiornata su file
+    /* Salva la lista aggiornata su file*/
     await salvaLibri(nuoviLibri);
 
     console.log('Libro salvato con successo:', nuovoLibro);
 
-    // Eventualmente, puoi navigare indietro o resettare il form qui
+    /* Eventualmente, puoi navigare indietro o resettare il form qui*/
      navigation.goBack();
   } catch (error) {
     console.error('Errore nel salvataggio del libro:', error);
   }
 
 };
+  const controlloInserimenti = () => {
+      if(titolo != '' && autore != '' && trama != '' && genere != '' && img != null){
+        console.log(img);
+        return true;
+      }else{
+        Alert.alert('ATTENZIONE!!', 'Popolare tutti i campi');
+        return false;
+      }
+      
+  };
 
   return (
     <ScrollView style={styleAddEditBook.container}>
@@ -67,8 +77,8 @@ const salvaLibro = async () => {
       />
 
       <Text style={styleAddEditBook.label}>Copertina</Text>
-      <ImagePickerComponent />
-
+      <ImagePickerComponent onImagePicked={(uri) => setImg(uri)} /> 
+{/* noi creiamo il componente imagePicker in addEdit e associamo questa funzione anonima che viene eseguita ogni volta da imagePickerComponent all'interno dell' IF che salva lo stato */}
       <Text style={styleAddEditBook.label}>Stato</Text>
       <Picker
         style={styleAddEditBook.picker}
@@ -89,8 +99,8 @@ const salvaLibro = async () => {
             onChangeText={setGenere}
       />
 
-      <TouchableOpacity style={styleAddEditBook.saveButton} onPress={salvaLibro}>
-        <Text style={styleAddEditBook.saveButtonText}>Salva</Text>//tasto per salvare il libro aggiunto
+      <TouchableOpacity style={styleAddEditBook.saveButton} onPress={() => {if(controlloInserimenti()){salvaLibro();}}}>
+        <Text style={styleAddEditBook.saveButtonText}>Salva</Text>
       </TouchableOpacity>
 
     </ScrollView>
