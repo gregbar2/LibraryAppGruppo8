@@ -53,7 +53,8 @@ export default function Categories(){
       
       const handleAdd = async () => { /* quando clicco sul bottone 'Aggiungi' del Dialog aggiunge il Genere nel file e nel vettore degli stati per poi nostrare un nuovo categoryItem */
         if(newGenere === ''){
-            Alert.alert('inserisci Genere');
+            setVisible(false);
+            Alert.alert('Inserire genere');
             return;
         }
         try {
