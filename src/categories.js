@@ -80,6 +80,7 @@ export default function Categories(){
         
         <ScrollView style={styleCategories.container}>
             <Dialog.Container visible={visible}>
+                {/* a cosa serve il Dialog?? */}
             <Dialog.Title>Nuova Categoria</Dialog.Title>
             <Dialog.Description>Inserisci la nuova categoria</Dialog.Description>
             <Dialog.Input
@@ -106,6 +107,4 @@ export default function Categories(){
         </View>
         </ScrollView>
     );
-
-    
 }
