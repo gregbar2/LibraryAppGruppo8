@@ -75,7 +75,7 @@ const salvaLibro = async () => {
       />
 
       <Text style={styleAddEditBook.label}>Copertina</Text>
-      <ImagePickerComponent onImagePicked={(uri) => setImg(uri)} /> 
+      <ImagePickerComponent onImagePicked={(uri) => setImg(uri)} img={null} /> 
 {/* noi creiamo il componente imagePicker in addEdit e associamo questa funzione anonima che viene eseguita ogni volta da imagePickerComponent all'interno dell' IF che salva lo stato */}
       <Text style={styleAddEditBook.label}>Stato</Text>
       <Picker

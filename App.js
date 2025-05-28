@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity,Image } from 'react-native';
 import MoveToDetails from './src/moveToDetails.js';
-import AddEdit from './src/addEdit.js';
 import Categories from './src/categories.js';
 import BookList from './src/allBooks.js';
 import SearchScreen from './src/searchScreen.js';

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Alert, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 /* Platform serve per verificare se il dispositivo collegato è ANDROID o IOS  */
-export default function ImagePickerComponent({onImagePicked }) {
-  const [imageUri, setImageUri] = useState(null);
+export default function ImagePickerComponent({onImagePicked,img }) {
+  const [imageUri, setImageUri] = useState(img);
 
   useEffect(() => { /* viene eseguito una sola volta all'avvio dell'app e richiede l'accesso alla galleria al dispositivo */
     (async () => { /* funzione/effetto collaterale da eseguire quanod viene renderizzato il componente la prima volta */
@@ -38,11 +38,11 @@ export default function ImagePickerComponent({onImagePicked }) {
     <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       
       {!imageUri && (<TouchableOpacity onPress={pickImage}><Image source={require('../assets/addImage.png')}/></TouchableOpacity>)}
-      {imageUri && (
+      {imageUri && (<TouchableOpacity onPress={pickImage}>
         <Image
           source={{ uri: imageUri }}
           style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }}
-        />
+        /></TouchableOpacity>
       )/* questo blocco tra {} prende il nome di blocco condizionale, il suo comportamento è che se imageUri è != null o undefined allora mostra il componente <Image> altrimenti non mostra nulla */}
     </View>
   );
