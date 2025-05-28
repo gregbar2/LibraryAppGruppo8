@@ -1,7 +1,11 @@
   import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
   import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
+<<<<<<< HEAD
   import { salvaLibri, caricaLibri } from './fileStorage';
+=======
+import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+>>>>>>> 267348f4595d60f1ced5ac026844301ed52e2a9d
 
   export default function BookDetails({route, navigation}) {
 
@@ -29,7 +33,6 @@
 
         // Salva le modifiche ogni volta che cambia la nota
         useEffect(() => {
-          if (!book) return;
 
           const saveData = async () => {
             try {
