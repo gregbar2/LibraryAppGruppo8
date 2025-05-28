@@ -29,8 +29,6 @@ const salvaLibro = async () => {
     /* Salva la lista aggiornata su file*/
     await salvaLibri(nuoviLibri);
 
-    console.log('Libro salvato con successo:', nuovoLibro);
-
     /* Eventualmente, puoi navigare indietro o resettare il form qui*/
      navigation.goBack();
   } catch (error) {

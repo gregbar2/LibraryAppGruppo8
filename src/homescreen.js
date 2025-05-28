@@ -101,7 +101,7 @@ const suggestedBooks = [
     id: '4',
     title: 'Prince',
     author: 'Jane Austen',
-    imageSource: require('../assets/prince.jpg'),
+    imageSource: require('../assets/default.jpg'),
   }
 ];
 

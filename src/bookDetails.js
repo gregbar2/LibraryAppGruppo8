@@ -70,14 +70,6 @@
 
 
 
-    /*const getImage = (nome) => {
-      switch (nome) {
-        case '1984.jpg': return require('../assets/1984.jpg');
-        case 'OrgoglioPregiudizio.jpg': return require('../assets/OrgoglioPregiudizio.jpg');
-        case 'prince.jpg': return require('../assets/prince.jpg');
-        default: return require('../assets/prince.jpg');
-      }
-    };*/
 
       return (
       
@@ -89,7 +81,7 @@
                       {/*Stile del nome dell'autore*/}
                       <Image source={book.img 
                         ? { uri: book.img  } 
-                        : require('../assets/prince.jpg') } style={styleBookDetail.coverImage} />
+                        : require('../assets/default.jpg') } style={styleBookDetail.coverImage} />
                       {/*Stile della copertina del libro*/}
 
                       <Text style={styleBookDetail.sectionTitle}>Trama</Text>
