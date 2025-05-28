@@ -21,7 +21,7 @@ const salvaLibro = async () => {
     const libriSalvati = await caricaLibri();
 
     /* Crea il nuovo libro con i dati dallo stato */
-    const nuovoLibro = { title, author, description, status, type, id: Date.now().toString()};
+    const nuovoLibro = { title, author, description, status, type, id: Date.now().toString(),img};
 
     /* Aggiungi il nuovo libro alla lista esistente*/
     const nuoviLibri = [...libriSalvati, nuovoLibro];

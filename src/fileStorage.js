@@ -27,3 +27,12 @@ export const caricaLibri = async () => {
     return [];
   }
 };
+
+export const eliminaLibri = async () => { /* pagina impostazioni per eliminare categorie e libri */
+  try {
+    await FileSystem.writeAsStringAsync(FILE_URI, '[]'); // un array vuoto come JSON
+    console.log('Libri svuotati con successo');
+  } catch (e) {
+    console.error('Errore nella pulizia dei libri:', e);
+  }
+};

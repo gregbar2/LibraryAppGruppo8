@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styleHomeScreen from './styles/styleHomeScreen';
-import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+import { salvaLibri, caricaLibri,eliminaLibri } from './fileStorage'; //importo il modulo per la persistenza
 import { useFocusEffect } from '@react-navigation/native';
 
 
@@ -38,7 +38,7 @@ export default function Homescreen({ navigation }) {
                         title={item.title}
                         author={item.author}
                         status={item.status}
-                        imageSource={getImage(item.coverImage)}
+                        imageSource={item.img}
                       />
 
               </TouchableOpacity>
@@ -59,7 +59,7 @@ export default function Homescreen({ navigation }) {
                   key={item.id}
                   title={item.title}
                   author={item.author}
-                  imageSource={item.imageSource}
+                  imageSource={item.img}
                 />
               ))}
        </ScrollView>
@@ -105,19 +105,21 @@ const suggestedBooks = [
   }
 ];
 
-const getImage = (nome) => {
+/*const getImage = (nome) => {
   switch (nome) {
     case '1984.jpg': return require('../assets/1984.jpg');
     case 'OrgoglioPregiudizio.jpg': return require('../assets/OrgoglioPregiudizio.jpg');
     case 'prince.jpg': return require('../assets/prince.jpg');
     default: return require('../assets/prince.jpg');
   }
-};
+};*/
 
 const BookComponent = ({ title, author, imageSource, status }) => {
   return (
     <View style={styleHomeScreen.bookItem}>
-      <Image source={imageSource} style={styleHomeScreen.bookImage} />
+      <Image source={imageSource 
+      ? { uri: imageSource } 
+      : require('../assets/prince.jpg')} style={styleHomeScreen.bookImage} />
       <View style={styleHomeScreen.bookTextContainer}>
         <Text style={styleHomeScreen.bookTitle}>{title}</Text>
         <Text style={styleHomeScreen.bookAuthor}>{author}</Text>
@@ -130,7 +132,9 @@ const BookComponent = ({ title, author, imageSource, status }) => {
 const BookSuggestion = ({ title, author, imageSource }) => {
   return (
     <View style={styleHomeScreen.suggestionItem}>
-      <Image source={imageSource} style={styleHomeScreen.suggestionImage} />
+      <Image source={imageSource 
+      ? { uri: imageSource } 
+      : require('../assets/prince.jpg') } style={styleHomeScreen.suggestionImage} />
       <Text style={styleHomeScreen.suggestionTitle} numberOfLines={1}>{title}</Text>
       <Text style={styleHomeScreen.suggestionAuthor} numberOfLines={1}>{author}</Text>
     </View>
