@@ -58,13 +58,25 @@ const styleBookDetail = StyleSheet.create({
       borderRadius: 10,
       alignItems: 'center',
       marginTop: 24,
-      marginBottom: 20,
+      marginBottom: 40,
     },
     addButtonText: {
       color: '#ffffff',
       fontSize: 16,
       fontWeight: 'bold',
     },
+    topRightButton: {
+      position: 'absolute',
+      top: 0,
+      right: 16,
+      padding: 8,
+      zIndex: 10,
+    },
+    icon: {
+      width: 24,
+      height: 28,
+      tintColor: 'black',
+    }
   });
 
   export default styleBookDetail;

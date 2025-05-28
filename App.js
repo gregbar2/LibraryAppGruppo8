@@ -31,25 +31,7 @@ export default function App() {
       tabBarStyle: routeName === 'Home' ? undefined : { display: 'none' }, /* controllo per nascondere la tabBar  */
     };
   }}/>
-      <Tab.Screen name="---" component={AddEdit} options={{tabBarIcon: ({ focused }) => (
-            <Image
-              source={require('./assets/tabIcon/searchIcon.png')}
-              style={{
-                width: 30,
-                height: 30,
-              }}
-            />
-          ) }}/>
-          <Tab.Screen name="Categorie" component={Categories} options={{tabBarIcon: ({ focused }) => (
-            <Image
-              source={require('./assets/tabIcon/catIcon.png')}
-              style={{
-                width: 30,
-                height: 30,
-              }}
-            />
-          ) }}/>
-          <Tab.Screen name="Cerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
+      <Tab.Screen name="Cerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
             <Image
               source={require('./assets/tabIcon/searchIcon.png')}
               style={{ 
@@ -59,6 +41,16 @@ export default function App() {
             />
           )}}
         />
+          <Tab.Screen name="Categorie" component={Categories} options={{tabBarIcon: ({ focused }) => (
+            <Image
+              source={require('./assets/tabIcon/catIcon.png')}
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+          ) }}/>
+          
     </Tab.Navigator>
   </NavigationContainer>
   );

@@ -66,7 +66,14 @@
           saveData();
         }, [notes, rating]);
 
+        const eliminaLibro = async (idDaEliminare) => {
 
+          const libriAggiornati = libri.filter(libro => libro.id !== idDaEliminare);
+
+          await salvaLibri(libriAggiornati);
+          setLibri(libriAggiornati);
+          navigation.goBack();
+        };
 
 
 
@@ -129,7 +136,9 @@
                       <TouchableOpacity style={styleBookDetail.addButton} >
                           <Text style={styleBookDetail.addButtonText}>+ Aggiungilo ai preferiti</Text>
                       </TouchableOpacity>
-                    
+                      <TouchableOpacity style={styleBookDetail.topRightButton} onPress={() => eliminaLibro(book.id)}>
+                      <Image source={require('../assets/trash.png')} style={styleBookDetail.icon} />
+                      </TouchableOpacity>
                 </ScrollView>
               </TouchableWithoutFeedback>
     
