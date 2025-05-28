@@ -1,6 +1,7 @@
   import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
   import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
+import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
 
   export default function BookDetails({route, navigation}) {
 
@@ -17,20 +18,17 @@
 
       const [notes, setNotes] = useState(book.notes);
       const [libri, setLibri] = useState([]);
-        const [loaded, setLoaded] = useState(false);
 
         useEffect(() => {
           async function loadLibri() {
             const data = await caricaLibri();
             setLibri(data);
-            setLoaded(true);
           }
           loadLibri();
         }, []);
 
         // Salva le modifiche ogni volta che cambia la nota
         useEffect(() => {
-          if (!book || !loaded) return;
 
           const saveData = async () => {
             try {
@@ -65,7 +63,7 @@
           };
 
           saveData();
-        }, [notes, loaded]);
+        }, [notes]);
 
 
 
