@@ -3,20 +3,40 @@
   import React, { useState } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
 
-  export default function BookDetails({route}) {
-      const { book } = route.params;
+  export default function BookDetails({route, navigation}) {
+
+      const { book } = route.params || {};
+      if (!book) {
+        return (
+          <View>
+            <Text>Errore: nessun libro fornito</Text>
+          </View>
+        );
+      }
+      console.log('route.params:', route.params);
+      console.log('book:', route.params?.book);
+
+    const getImage = (nome) => {
+      switch (nome) {
+        case '1984.jpg': return require('../assets/1984.jpg');
+        case 'OrgoglioPregiudizio.jpg': return require('../assets/OrgoglioPregiudizio.jpg');
+        case 'prince.jpg': return require('../assets/prince.jpg');
+        default: return require('../assets/prince.jpg');
+      }
+    };
+
       return (
       
               <View style={styleBookDetail.container}>
-                      <Text style={styleBookDetail.title}>{book.title}</Text> {/*Stile del titolo*/}
-                      <Text style={styleBookDetail.author}>{book.author}</Text> {/*Stile del nome dell'autore*/}
-                      <Image source={{ uri: book.coverImage }} style={styleBookDetail.coverImage} /> {/*Stile della copertina del libro*/}
+                      <Text style={styleBookDetail.title}>{book.titolo}</Text> {/*Stile del titolo*/}
+                      <Text style={styleBookDetail.author}>{book.autore}</Text> {/*Stile del nome dell'autore*/}
+                      <Image source={getImage(book.immagine)} style={styleBookDetail.coverImage} /> {/*Stile della copertina del libro*/}
 
                       <Text style={styleBookDetail.sectionTitle}>Trama</Text>
-                      <Text style={styleBookDetail.description}>{book.description}</Text> {/*Stile della trama*/}
+                      <Text style={styleBookDetail.description}>{book.description || 'Nessuna trama disponibile'}</Text> {/*Stile della trama*/}
           
                       <Text style={styleBookDetail.sectionTitle}>Stato</Text>
-                      <Text style={styleBookDetail.status}>{book.state || 'Nessuno stato disponibile'}</Text> {/*Stile dello stato*/}
+                      <Text style={styleBookDetail.status}>{book.stato || 'Nessuno stato disponibile'}</Text> {/*Stile dello stato*/}
                         
                         
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>

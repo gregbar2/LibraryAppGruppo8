@@ -22,24 +22,26 @@ export default function Homescreen({ navigation }) {
        loadData();
      }, [])
    );
-
   return (
     <ScrollView contentContainerStyle={styleHomeScreen.container}>
       <Text style={styleHomeScreen.title}>Libreria Personale</Text>
       <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
 
+
+
       <View>
          {libri.map((item) => (
-         <TouchableOpacity onPress={()=>navigation.navigate("Dettaglio")}>
-                  <BookComponent
-                    key={item.id}
-                    title={item.title}
-                    author={item.author}
-                    status={item.status}
-                    imageSource={getImage(item.coverImage)}
-                  />
-          </TouchableOpacity>
-                ))}
+             <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
+
+                      <BookComponent
+                        title={item.title}
+                        author={item.author}
+                        status={item.status}
+                        imageSource={getImage(item.coverImage)}
+                      />
+
+              </TouchableOpacity>
+          ))}
       </View>
 
       <Text style={styleHomeScreen.sectionTitle}>Suggerimenti casuali</Text>
