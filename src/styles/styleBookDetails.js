@@ -67,16 +67,26 @@ const styleBookDetail = StyleSheet.create({
     },
     topRightButton: {
       position: 'absolute',
-      top: 0,
-      right: 16,
+      right: 8,
       padding: 8,
       zIndex: 10,
     },
-    icon: {
+    icondx: {
       width: 24,
       height: 28,
       tintColor: 'black',
-    }
+    },
+    topLeftButton: {
+      position: 'absolute',
+      left: 8,
+      padding: 8,
+      zIndex: 10,
+    },
+    iconsx: {
+      width: 24,
+      height: 24,
+      tintColor: 'black', // cosi elimina la scritta
+    },
   });
 
   export default styleBookDetail;

@@ -68,11 +68,11 @@
 
         const eliminaLibro = async (idDaEliminare) => {
 
-          const libriAggiornati = libri.filter(libro => libro.id !== idDaEliminare);
+          const libriAggiornati = libri.filter(libro => libro.id !== idDaEliminare); //prelevo tutti i libri escluso quello da eliminare
 
-          await salvaLibri(libriAggiornati);
-          setLibri(libriAggiornati);
-          navigation.goBack();
+          await salvaLibri(libriAggiornati); //sovrascrivo il file
+          setLibri(libriAggiornati); //aggiorno il vettore dello stato
+          navigation.goBack(); //torno nella home
         };
 
 
@@ -133,11 +133,14 @@
                       
                       
                     {/*Bottone + Stile del bottone*/}
-                      <TouchableOpacity style={styleBookDetail.addButton} >
-                          <Text style={styleBookDetail.addButtonText}>+ Aggiungilo ai preferiti</Text>
+                      <TouchableOpacity style={styleBookDetail.addButton}>
+                          <Text style={styleBookDetail.addButtonText}>+ Aggiungi ai preferiti</Text>
                       </TouchableOpacity>
                       <TouchableOpacity style={styleBookDetail.topRightButton} onPress={() => eliminaLibro(book.id)}>
-                      <Image source={require('../assets/trash.png')} style={styleBookDetail.icon} />
+                      <Image source={require('../assets/trash.png')} style={styleBookDetail.icondx} />
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styleBookDetail.topLeftButton} onPress={()=>navigation.navigate("Modifica Libro", { book: book })}>6à
+                      <Image source={require('../assets/pencil.png')} style={styleBookDetail.iconsx} />
                       </TouchableOpacity>
                 </ScrollView>
               </TouchableWithoutFeedback>

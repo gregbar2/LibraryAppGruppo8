@@ -76,7 +76,7 @@ export default function Homescreen({ navigation }) {
 
 
 
-      <TouchableOpacity onPress={()=>navigation.navigate("Aggiunta o Modifica Libro")} style={styleHomeScreen.addButton}>
+      <TouchableOpacity onPress={()=>navigation.navigate("Aggiungi Libro")} style={styleHomeScreen.addButton}>
         <Text style={styleHomeScreen.addButtonText} >+ Aggiungi nuovo libro</Text>
       </TouchableOpacity>
 
