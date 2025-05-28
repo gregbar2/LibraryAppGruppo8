@@ -1,8 +1,11 @@
-  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
   import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
-  import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
-
+<<<<<<< HEAD
+  import { salvaLibri, caricaLibri } from './fileStorage';
+=======
+import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+>>>>>>> 267348f4595d60f1ced5ac026844301ed52e2a9d
 
   export default function BookDetails({route, navigation}) {
 
@@ -18,7 +21,6 @@
       }
 
       const [notes, setNotes] = useState(book.notes);
-      const [rating, setRating] = useState(book.rating);
       const [libri, setLibri] = useState([]);
 
         useEffect(() => {
@@ -29,7 +31,7 @@
           loadLibri();
         }, []);
 
-        // Salva le modifiche ogni volta che cambia la nota e il rating
+        // Salva le modifiche ogni volta che cambia la nota
         useEffect(() => {
 
           const saveData = async () => {
@@ -43,8 +45,8 @@
               for (let i = 0; i < libriCorrenti.length; i++) {
                 const l = libriCorrenti[i];
                 if (l.id.toString() === book.id.toString()) {
+                  console.log('Aggiornamento libro con id: ${l.id}');
                   l.notes=notes;
-                  l.rating=rating;
                   updatedLibri.push(l);
                 } else {
                   updatedLibri.push(l);
@@ -57,6 +59,7 @@
               // Aggiorna lo stato locale
               setLibri(updatedLibri);
 
+              console.log('Lista aggiornata salvata:', updatedLibri);
 
             } catch (e) {
               Alert.alert('Errore nel salvataggio', e.message);
@@ -64,7 +67,7 @@
           };
 
           saveData();
-        }, [notes, rating]);
+        }, [notes]);
 
 
 
@@ -101,20 +104,10 @@
                         
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
                       <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{book.rating ? '★'.repeat(book.rating) : 'Nessuna valutazione'}</Text>
-                      <TextInput
-                           value={rating}
-                            onChangeText={text => {
-                               const num = parseInt(text);
-                               if (!isNaN(num) && num >= 0 && num <= 5) {
-                                 setRating(num);
-                               }else {
-                                 Alert.alert('Valore non valido', 'Inserisci un numero compreso tra 1 e 5');
-                               }
-                             }}
-                           placeholder="Inserisci un numero da 1 a 5..."
-                      />
+
 
                       <Text style={styleBookDetail.sectionTitle}>Note</Text>
+                      <Text style={styleBookDetail.noteBox}>{notes}</Text>
                       {/*Stile delle note*/}
                       <TextInput
                         multiline

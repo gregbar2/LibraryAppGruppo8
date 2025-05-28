@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import styleCategories from './styles/styleCategories';
 import { caricaLibri } from './fileStorage.js';
 import { salvaCategorie,caricaCategorie,eliminaCategorie } from './catStorage.js';
@@ -52,6 +52,10 @@ export default function Categories(){
       };
       
       const handleAdd = async () => { /* quando clicco sul bottone 'Aggiungi' del Dialog aggiunge il Genere nel file e nel vettore degli stati per poi nostrare un nuovo categoryItem */
+        if(newGenere === ''){
+            Alert.alert('inserisci Genere');
+            return;
+        }
         try {
             /* Carica la lista di categorie già salvata (se presente) */
             const catSalvate = await caricaCategorie();
@@ -73,6 +77,7 @@ export default function Categories(){
             console.error('Errore nel salvataggio del libro:', error);
             setVisible(false);
             setNewGenere('');//svuoto il TextInput
+            
         }
       };
     
