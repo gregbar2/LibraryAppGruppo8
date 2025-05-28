@@ -1,7 +1,8 @@
-  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
+  import { ScrollView, Text,TextInput, Image, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
   import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
   import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+
 
   export default function BookDetails({route, navigation}) {
 
@@ -82,14 +83,14 @@
       return (
       
               <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={styleBookDetail.container}>
+                <ScrollView style={styleBookDetail.container}>
                       <Text style={styleBookDetail.title}>{book.title}</Text>
                       {/*Stile del titolo*/}
                       <Text style={styleBookDetail.author}>{book.author}</Text>
                       {/*Stile del nome dell'autore*/}
                       <Image source={book.img 
                         ? { uri: book.img  } 
-                        : require('../assets/prince.jpg') } style={styleBookDetail.coverImage} />
+                        : require('../assets/default.jpg') } style={styleBookDetail.coverImage} />
                       {/*Stile della copertina del libro*/}
 
                       <Text style={styleBookDetail.sectionTitle}>Trama</Text>
@@ -137,7 +138,7 @@
                           <Text style={styleBookDetail.addButtonText}>+ Aggiungilo ai preferiti</Text>
                       </TouchableOpacity>
                     
-                </View>
+                </ScrollView>
               </TouchableWithoutFeedback>
     
       );

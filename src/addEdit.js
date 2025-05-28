@@ -39,8 +39,8 @@ const salvaLibro = async () => {
 
 };
   const controlloInserimenti = () => {
-      if(title != '' && author != '' && description != '' && type != '' && img != null){
-        console.log(img);
+      if(title != '' && author != '' && description != '' && type != ''){
+        
         return true;
       }else{
         Alert.alert('ATTENZIONE!!', 'Popolare tutti i campi');
