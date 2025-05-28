@@ -71,14 +71,6 @@
 
 
 
-    /*const getImage = (nome) => {
-      switch (nome) {
-        case '1984.jpg': return require('../assets/1984.jpg');
-        case 'OrgoglioPregiudizio.jpg': return require('../assets/OrgoglioPregiudizio.jpg');
-        case 'prince.jpg': return require('../assets/prince.jpg');
-        default: return require('../assets/prince.jpg');
-      }
-    };*/
 
       return (
       
