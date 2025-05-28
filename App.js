@@ -2,9 +2,11 @@ import { StyleSheet, Text, View, TouchableOpacity,Image } from 'react-native';
 import MoveToDetails from './src/moveToDetails.js';
 import AddEdit from './src/addEdit.js';
 import Categories from './src/categories.js';
+import SearchScreen from './src/searchScreen.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+
 
 
 // Inizializzo il Tab Navigator
@@ -47,6 +49,16 @@ export default function App() {
               }}
             />
           ) }}/>
+          <Tab.Screen name="Cerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
+            <Image
+              source={require('./assets/tabIcon/searchIcon.png')}
+              style={{ 
+                width: 30, 
+                height: 30 
+              }}
+            />
+          )}}
+        />
     </Tab.Navigator>
   </NavigationContainer>
   );
