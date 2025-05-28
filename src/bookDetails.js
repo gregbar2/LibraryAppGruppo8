@@ -1,4 +1,4 @@
-  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
   import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
   import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
@@ -81,7 +81,8 @@
 
       return (
       
-              <View style={styleBookDetail.container}>
+              <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styleBookDetail.container}>
                       <Text style={styleBookDetail.title}>{book.title}</Text>
                       {/*Stile del titolo*/}
                       <Text style={styleBookDetail.author}>{book.author}</Text>
@@ -99,9 +100,10 @@
                         
                         
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
-                      <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{book.rating ? '★'.repeat(book.rating) : 'Nessuna valutazione'}</Text>
+                      {/*aggiorno le stelle del rating con lo state invece della props del book*/}
+                      <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{rating ? '★'.repeat(rating) : 'Nessuna valutazione'}</Text>
                        <TextInput
-                             value={rating.toString()}
+                             value={rating}
                              keyboardType="numeric"
                              onChangeText={text => {
                                 const num = parseInt(text);
@@ -133,8 +135,8 @@
                           <Text style={styleBookDetail.addButtonText}>+ Aggiungilo ai preferiti</Text>
                       </TouchableOpacity>
                     
-
-              </View>
+                </View>
+              </TouchableWithoutFeedback>
     
       );
   }
