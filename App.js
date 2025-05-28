@@ -30,7 +30,7 @@ export default function App() {
   }}/>
       <Tab.Screen name="---" component={AddEdit} options={{tabBarIcon: ({ focused }) => (
             <Image
-              source={require('./assets/tabIcon/catIcon.png')}
+              source={require('./assets/tabIcon/searchIcon.png')}
               style={{
                 width: 30,
                 height: 30,
