@@ -4,6 +4,7 @@ const FILE_URI = FileSystem.documentDirectory + 'libri.json';
 
 // Funzione per salvare i dati
 export const salvaLibri = async (libri) => {
+
   try {
     const jsonValue = JSON.stringify(libri);
     await FileSystem.writeAsStringAsync(FILE_URI, jsonValue);

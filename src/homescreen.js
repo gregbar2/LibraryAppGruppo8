@@ -8,10 +8,6 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Homescreen({ navigation }) {
   const [libri, setLibri] = useState([]);
 
-   const loadData = async () => {
-      const data = await caricaLibri();
-      setLibri(data);
-    };
 
    useFocusEffect(
      useCallback(() => {
@@ -22,6 +18,7 @@ export default function Homescreen({ navigation }) {
        loadData();
      }, [])
    );
+
   return (
     <ScrollView contentContainerStyle={styleHomeScreen.container}>
       <Text style={styleHomeScreen.title}>Libreria Personale</Text>

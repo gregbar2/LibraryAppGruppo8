@@ -1,11 +1,12 @@
-  import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-
-  import React, { useState } from 'react';
+  import { View, Text,TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
+  import React, { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
 
   export default function BookDetails({route, navigation}) {
 
-      const { book } = route.params || {};
+      const { book } = route.params;
+
+
       if (!book) {
         return (
           <View>
@@ -13,8 +14,63 @@
           </View>
         );
       }
-      console.log('route.params:', route.params);
-      console.log('book:', route.params?.book);
+
+      const [notes, setNotes] = useState(book.notes);
+      const [libri, setLibri] = useState([]);
+        const [loaded, setLoaded] = useState(false);
+
+        useEffect(() => {
+          async function loadLibri() {
+            const data = await caricaLibri();
+            setLibri(data);
+            setLoaded(true);
+          }
+          loadLibri();
+        }, []);
+
+        // Salva le modifiche ogni volta che cambia la nota
+        useEffect(() => {
+          if (!book || !loaded) return;
+
+          const saveData = async () => {
+            try {
+              // Carica la lista aggiornata da file per sicurezza
+              const libriCorrenti = await caricaLibri();
+
+              // Aggiorna solo il libro con lo stesso id
+              const updatedLibri = [];
+
+              for (let i = 0; i < libriCorrenti.length; i++) {
+                const l = libriCorrenti[i];
+                if (l.id.toString() === book.id.toString()) {
+                  console.log('Aggiornamento libro con id: ${l.id}');
+                  l.notes=notes;
+                  updatedLibri.push(l);
+                } else {
+                  updatedLibri.push(l);
+                }
+              }
+
+              // Salva la lista aggiornata intera
+              await salvaLibri(updatedLibri);
+
+              // Aggiorna lo stato locale
+              setLibri(updatedLibri);
+
+              console.log('Lista aggiornata salvata:', updatedLibri);
+
+            } catch (e) {
+              Alert.alert('Errore nel salvataggio', e.message);
+            }
+          };
+
+          saveData();
+        }, [notes, loaded]);
+
+
+
+
+
 
     const getImage = (nome) => {
       switch (nome) {
@@ -47,10 +103,17 @@
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
                       <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{book.rating ? '★'.repeat(book.rating) : 'Nessuna valutazione'}</Text>
 
-                    
+
                       <Text style={styleBookDetail.sectionTitle}>Note</Text>
-                      <Text style={styleBookDetail.noteBox}>{book.notes || 'Nessuna nota disponibile'}</Text>
+                      <Text style={styleBookDetail.noteBox}>{notes}</Text>
                       {/*Stile delle note*/}
+                      <TextInput
+                        multiline
+                        style={{ height: 100, borderColor: 'gray', borderWidth: 1, padding: 8 }}
+                        value={notes}
+                        onChangeText={setNotes}
+                        placeholder="Scrivi una nota..."
+                      />
                       
                       
                     {/*Bottone + Stile del bottone*/}
