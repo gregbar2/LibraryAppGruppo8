@@ -29,7 +29,6 @@
 
         // Salva le modifiche ogni volta che cambia la nota
         useEffect(() => {
-          
 
           const saveData = async () => {
             try {
@@ -42,6 +41,7 @@
               for (let i = 0; i < libriCorrenti.length; i++) {
                 const l = libriCorrenti[i];
                 if (l.id.toString() === book.id.toString()) {
+                  console.log('Aggiornamento libro con id: ${l.id}');
                   l.notes=notes;
                   updatedLibri.push(l);
                 } else {
@@ -55,6 +55,7 @@
               // Aggiorna lo stato locale
               setLibri(updatedLibri);
 
+              console.log('Lista aggiornata salvata:', updatedLibri);
 
             } catch (e) {
               Alert.alert('Errore nel salvataggio', e.message);
