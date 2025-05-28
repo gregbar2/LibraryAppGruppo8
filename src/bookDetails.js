@@ -28,15 +28,20 @@
       return (
       
               <View style={styleBookDetail.container}>
-                      <Text style={styleBookDetail.title}>{book.titolo}</Text> {/*Stile del titolo*/}
-                      <Text style={styleBookDetail.author}>{book.autore}</Text> {/*Stile del nome dell'autore*/}
-                      <Image source={getImage(book.immagine)} style={styleBookDetail.coverImage} /> {/*Stile della copertina del libro*/}
+                      <Text style={styleBookDetail.title}>{book.titolo}</Text> 
+                      {/*Stile del titolo*/}
+                      <Text style={styleBookDetail.author}>{book.autore}</Text> 
+                      {/*Stile del nome dell'autore*/}
+                      <Image source={getImage(book.immagine)} style={styleBookDetail.coverImage} /> 
+                      {/*Stile della copertina del libro*/}
 
                       <Text style={styleBookDetail.sectionTitle}>Trama</Text>
-                      <Text style={styleBookDetail.description}>{book.description || 'Nessuna trama disponibile'}</Text> {/*Stile della trama*/}
+                      <Text style={styleBookDetail.description}>{book.description || 'Nessuna trama disponibile'}</Text> 
+                      {/*Stile della trama*/}
           
                       <Text style={styleBookDetail.sectionTitle}>Stato</Text>
-                      <Text style={styleBookDetail.status}>{book.stato || 'Nessuno stato disponibile'}</Text> {/*Stile dello stato*/}
+                      <Text style={styleBookDetail.status}>{book.stato || 'Nessuno stato disponibile'}</Text> 
+                      {/*Stile dello stato*/}
                         
                         
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
@@ -44,7 +49,8 @@
 
                     
                       <Text style={styleBookDetail.sectionTitle}>Note</Text>
-                      <Text style={styleBookDetail.noteBox}>{book.notes || 'Nessuna nota disponibile'}</Text>{/*Stile delle note*/}
+                      <Text style={styleBookDetail.noteBox}>{book.notes || 'Nessuna nota disponibile'}</Text>
+                      {/*Stile delle note*/}
                       
                       
                     {/*Bottone + Stile del bottone*/}
