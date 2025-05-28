@@ -76,7 +76,13 @@ const styleBookDetail = StyleSheet.create({
       width: 24,
       height: 28,
       tintColor: 'black',
-    }
+    },
+    ratingInput: {
+        height: 40,
+        fontSize: 16,
+        color: '#333',
+        backgroundColor: '#fff'
+      }
   });
 
   export default styleBookDetail;

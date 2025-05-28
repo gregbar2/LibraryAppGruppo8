@@ -103,8 +103,9 @@
                         
                       <Text style={styleBookDetail.sectionTitle}>Valutazione</Text>
                       {/*aggiorno le stelle del rating con lo state invece della props del book*/}
-                      <Text style={{ fontSize: 18, marginBottom: 24 , color:'gold' }}>{rating ? '★'.repeat(rating) : 'Nessuna valutazione'}</Text>
+                      <Text style={{ fontSize: 18, marginBottom: 0 , color:'gold' }}>{rating ? '★'.repeat(rating) : 'Nessuna valutazione'}</Text>
                        <TextInput
+                             style={styleBookDetail.ratingInput}
                              value={rating}
                              keyboardType="numeric"
                              onChangeText={text => {
