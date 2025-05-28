@@ -6,10 +6,21 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 export default function Homescreen({ navigation }) {
-  const [libri, setLibri] = useState([]);
-  
 
-   useFocusEffect(/* viene eseguita quando torni dalla pagina AddEdit */
+
+    const [libri, setLibri] = useState([]);
+
+   /*la funzione sort mescola casualmente l'insieme di libri, poi di questi elementi prende solo i primi n(5)*/
+    const getRandomBooks = (array, n) => {
+        const shuffled = [...array].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, n);//ritorna solo i primi n elementi della lista mescolata
+      };
+
+  // Estraggo i libri suggeriti casualmente, massimo 5
+  const suggestedBooksRandom = getRandomBooks(libri, 5);
+
+
+   useFocusEffect(/* viene eseguita ogni volta che spostiamo il focus su questa pagina */
      useCallback(() => {
        const loadData = async () => {
          const data = await caricaLibri();
@@ -18,6 +29,7 @@ export default function Homescreen({ navigation }) {
        loadData();
      }, [])
    );
+
 
   return (
     <ScrollView contentContainerStyle={styleHomeScreen.container}>
@@ -50,8 +62,8 @@ export default function Homescreen({ navigation }) {
               contentContainerStyle={styleHomeScreen.suggestionList}
        >
 
-
-       {suggestedBooks.map((item) => (
+       {/*visualizzo il vettore di libri generati casualmente*/}
+       {suggestedBooksRandom.map((item) => (
                 <BookSuggestion
                   key={item.id}
                   title={item.title}
@@ -67,40 +79,17 @@ export default function Homescreen({ navigation }) {
       <TouchableOpacity onPress={()=>navigation.navigate("Aggiunta o Modifica Libro")} style={styleHomeScreen.addButton}>
         <Text style={styleHomeScreen.addButtonText} >+ Aggiungi nuovo libro</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={eliminaLibri} style={{ padding: 10, backgroundColor: 'red', margin: 10 }}>
+              <Text style={{ color: 'white', textAlign: 'center' }}>Svuota tutti i libri</Text>
+       </TouchableOpacity>
+
+
     </ScrollView>
   );
 }
 
 
-
-
-
-const suggestedBooks = [
-  {
-    id: '1',
-    title: 'The Hobbit',
-    author: 'J.R.R. Tolkien',
-    imageSource: require('../assets/1984.jpg'),
-  },
-  {
-    id: '2',
-    title: 'Pride and Prejudice',
-    author: 'Jane Austen',
-    imageSource: require('../assets/OrgoglioPregiudizio.jpg'),
-  },
-  {
-    id: '3',
-    title: 'Another Book',
-    author: 'Jane Austen',
-    imageSource: require('../assets/1984.jpg'),
-  },
-  {
-    id: '4',
-    title: 'Prince',
-    author: 'Jane Austen',
-    imageSource: require('../assets/default.jpg'),
-  }
-];
 
 
 const BookComponent = ({ title, author, imageSource, status }) => {
