@@ -10,6 +10,10 @@ export default function SearchScreen() {
   const [categoria, setCategoria] = useState('');
   const [valutazione, setValutazione] = useState('');
 
+
+  const categoriePredefinite = ["Romanzo", "Fantasy", "Comico", "Dramma", "Poetico"];
+
+
   // Carica i libri ogni volta che si torna su questa schermata
   useFocusEffect(
     useCallback(() => {
@@ -36,15 +40,15 @@ export default function SearchScreen() {
   const filteredBooks = books.filter(book => {
   const titolo = book.title || '';
   const autore = book.author || '';
-  const tipo = book.type || book.genere || book.genre || '';
-  const statoLibro = book.state || book.status || '';
+  const tipo = book.type || '';
+  const statoLibro = book.status || '';
   const rating = book.rating ? String(book.rating) : '';
 
   return (
     (titolo.toLowerCase().includes(searchText.toLowerCase()) ||
       autore.toLowerCase().includes(searchText.toLowerCase())) &&
     (stato === '' || statoLibro.toLowerCase() === stato.toLowerCase()) &&
-    (categoria === '' || tipo.toLowerCase() === categoria.toLowerCase()) &&
+    (categoria === '' || ( categoria === 'Altro' ? !categoriePredefinite.includes(tipo): tipo === categoria)) &&
     (valutazione === '' || rating === valutazione)
   );
 });
@@ -77,6 +81,7 @@ export default function SearchScreen() {
         {Bottone("Comico", "Comico", categoria, setCategoria)}
         {Bottone("Dramma", "Dramma", categoria, setCategoria)}
         {Bottone("Poetico", "Poetico", categoria, setCategoria)}
+        {Bottone("Altro", "Altro", categoria, setCategoria)}
       </View>
 
       {/* Valutazione */}
