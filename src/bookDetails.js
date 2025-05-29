@@ -130,9 +130,9 @@
                                   setRating('');
                                 }else {
                                   Alert.alert('Valore non valido', 'Inserisci un numero compreso tra 1 e 5');
-                                  setTimeout(() => {
+                                /*  setTimeout(() => {*/
                                           setRating('');  // svuota il campo
-                                        }, 100);
+                                     /*   }, 100);*/
                                 }
                               }}
                             placeholder="Scrivi un numero tra 1 e 5..."

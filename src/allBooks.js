@@ -1,4 +1,4 @@
-import React, { useState, useCallback} from 'react';
+import { useState, useCallback} from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { caricaLibri } from './fileStorage'; // la tua funzione di caricamento
@@ -7,7 +7,7 @@ import styleAllBooks from './styles/styleAllBooks'; // tuo stile personalizzato
 
 export default function BookList({ navigation }) {
 
-  const [libri, setLibri] = useState([]);
+ const [libri, setLibri] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
@@ -19,19 +19,20 @@ export default function BookList({ navigation }) {
     }, [])
   );
 
-const renderItem = ({ item }) => (
+ const bookComponent = ({ item }) => (
+
      <TouchableOpacity
-       style={[styleAllBooks.bookItem, { flexDirection: 'row', alignItems: 'center' }]}
+       style={styleAllBooks.bookItem}
        onPress={() => navigation.navigate("Dettaglio", { book: item })}
      >
        <View style={{ flex: 1 }}>
-         <Text style={styleAllBooks.bookTitle}>{item.title}</Text>
-         <Text style={styleAllBooks.bookAuthor}>{item.author}</Text>
+         <Text style={styleAllBooks.bookTitle} numberOfLines={1}>{item.title}</Text>
+         <Text style={styleAllBooks.bookAuthor} numberOfLines={1}>{item.author}</Text>
        </View>
 
        <Image
          source={item.img ? { uri: item.img } : require('../assets/default.jpg')}
-         style={{ width: 60, height: 90, marginLeft: 10, borderRadius: 4 }}
+         style={styleAllBooks.img}
          resizeMode="cover"
        />
      </TouchableOpacity>
@@ -51,7 +52,7 @@ const renderItem = ({ item }) => (
         <FlatList
           data={libri}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={renderItem}
+            renderItem={bookComponent}
             numColumns={2}
             columnWrapperStyle={styleAllBooks.row}
             contentContainerStyle={{ paddingBottom: 20 }}

@@ -2,7 +2,7 @@ import { View, Text, FlatList, Image, TouchableOpacity, ScrollView,Alert,StyleSh
 import styleCategories from './styles/styleCategories';
 import { caricaLibri } from './fileStorage.js';
 import { salvaCategorie,caricaCategorie,eliminaCategorie } from './catStorage.js';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import Dialog from 'react-native-dialog';
 
