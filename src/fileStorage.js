@@ -36,8 +36,8 @@ export const eliminaLibri = async () => { /* pagina impostazioni per eliminare c
     console.error('Errore nella pulizia dei libri:', e);
   }
 };
-
-/*const libri = []; 
+/*
+const libri = [];
 export const caricoLibriRandom = async () => {
   for (let i = 0; i < 30; i++) {
     const libro = {
