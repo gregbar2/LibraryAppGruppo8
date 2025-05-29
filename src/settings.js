@@ -9,13 +9,13 @@ export default function Settings({ navigation }){
          <View style={styleSettings.container}>
 
             <View style={styleSettings.buttonContainer}>
-             <TouchableOpacity style={[styleSettings.button, styleSettings.danger]}  onPress={eliminaLibri}>
-                      <Text style={styleSettings.buttonText}>🗑 Svuota tutti i libri</Text>
-             </TouchableOpacity>
+                 <TouchableOpacity style={[styleSettings.button, styleSettings.danger]}  onPress={eliminaLibri}>
+                          <Text style={styleSettings.buttonText}>🗑 Svuota tutti i libri</Text>
+                 </TouchableOpacity>
 
-             <TouchableOpacity onPress={eliminaCategorie} style={[styleSettings.button, styleSettings.warning]}>
-                      <Text style={styleSettings.buttonText}>⚠️ Elimina tutte le categorie personalizzate</Text>
-             </TouchableOpacity>
+                 <TouchableOpacity onPress={eliminaCategorie} style={[styleSettings.button, styleSettings.warning]}>
+                          <Text style={styleSettings.buttonText}>⚠️ Elimina tutte le categorie personalizzate</Text>
+                 </TouchableOpacity>
             </View>
 
          </View>

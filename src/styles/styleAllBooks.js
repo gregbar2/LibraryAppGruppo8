@@ -42,7 +42,9 @@ const styleAllBooks = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 6,
-    elevation: 3
+    elevation: 3,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   bookTitle: {
@@ -55,6 +57,12 @@ const styleAllBooks = StyleSheet.create({
   bookAuthor: {
     fontSize: 14,
     color: '#666'
+  },
+  img: {
+  width: 60,
+  height: 90,
+  marginLeft: 10,
+  borderRadius: 4
   }
 });
 

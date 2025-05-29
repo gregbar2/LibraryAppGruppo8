@@ -30,6 +30,10 @@ export const caricaLibri = async () => {
 
 export const eliminaLibri = async () => { /* pagina impostazioni per eliminare categorie e libri */
   try {
+    const fileInfo = await FileSystem.getInfoAsync(FILE_URI);
+    if (!fileInfo.exists) {
+       return; // Se il file non esiste, ritorna un array vuoto
+    }
     await FileSystem.writeAsStringAsync(FILE_URI, '[]'); // un array vuoto come JSON
     console.log('Libri svuotati con successo');
   } catch (e) {

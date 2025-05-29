@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styleHomeScreen from './styles/styleHomeScreen';
 import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
@@ -33,15 +33,11 @@ export default function Homescreen({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styleHomeScreen.container}>
+
       <Text style={styleHomeScreen.title}>Libreria Personale</Text>
       <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
 
-
-
       <View>
-      {/*libri.slice serve a far visualizzare solo gli utlimi 5 libri aggiunti.*/}
-      {/*faccio reverse() perchè così riesco a visualizzare i libri dal piu recente al meno recente*/}
-      {/*Controllo per verificare se è presente almeno un libro, in caso negativo mi viene mostrato un mesaggio*/}
        {libri.length === 0 ? (
           <Text style={styleHomeScreen.placeholderText}>
             La tua libreria è vuota!
@@ -50,14 +46,14 @@ export default function Homescreen({ navigation }) {
          libri.slice(-5).reverse().map((item) => (
              <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
 
-                      <BookComponent
-                        title={item.title}
-                        author={item.author}
-                        status={item.status}
-                        imageSource={item.img}
-                      />
+                  <BookComponent
+                    title={item.title}
+                    author={item.author}
+                    status={item.status}
+                    imageSource={item.img}
+                  />
 
-              </TouchableOpacity>
+             </TouchableOpacity>
          ))
        )}
       </View>
@@ -70,7 +66,6 @@ export default function Homescreen({ navigation }) {
               contentContainerStyle={styleHomeScreen.suggestionList}
        >
 
-       {/*visualizzo il vettore di libri generati casualmente*/}
        {suggestedBooksRandom.map((item) => (
             <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
 
@@ -92,11 +87,9 @@ export default function Homescreen({ navigation }) {
         <Text style={styleHomeScreen.addButtonText} >+ Aggiungi nuovo libro</Text>
       </TouchableOpacity>
 
-
-
     </ScrollView>
   );
-}
+};
 
 
 
@@ -108,8 +101,8 @@ const BookComponent = ({ title, author, imageSource, status }) => {
       ? { uri: imageSource } 
       : require('../assets/default.jpg')} style={styleHomeScreen.bookImage} />
       <View style={styleHomeScreen.bookTextContainer}>
-        <Text style={styleHomeScreen.bookTitle} >{title}</Text>
-        <Text style={styleHomeScreen.bookAuthor}>{author}</Text>
+        <Text style={styleHomeScreen.bookTitle} numberOfLines={1}>{title}</Text>
+        <Text style={styleHomeScreen.bookAuthor} numberOfLines={1}>{author}</Text>
       </View>
       <Text style={styleHomeScreen.bookStatus}>{status}</Text>
     </View>

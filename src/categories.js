@@ -1,8 +1,8 @@
 import { View, Text, Image, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import styleCategories from './styles/styleCategories';
 import { caricaLibri } from './fileStorage.js';
-import { salvaCategorie,caricaCategorie } from './catStorage.js';
-import { useCallback, useState } from 'react';
+import { salvaCategorie,caricaCategorie,eliminaCategorie } from './catStorage.js';
+import { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import Dialog from 'react-native-dialog';
 
