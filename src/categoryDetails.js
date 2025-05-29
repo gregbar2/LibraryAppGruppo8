@@ -15,19 +15,16 @@ export default function CategoryDetails({route,navigation}){
         useCallback(() => {
           const loadData = async () => {
             const data = await caricaLibri();
-            setLibri(data);
+            setLibri(data.filter(libro => selCat !== 'Preferiti' ? (libro.type === selCat) : (libro.favourite === 'true')));
           };
           loadData();
         }, [])
         );
-/*
-    const takeBook = () => {
-        const libriFiltrati = libri.filter(libro => libro.type === selCat);
-        return 
-    }*/
+
+    
     
 
-    const renderItem = ({ item }) => (
+    const bookComponent = ({ item }) => (
          <TouchableOpacity
            style={[styleCategoryDetails.bookItem, { flexDirection: 'row', alignItems: 'center' }]}
            onPress={() => navigation.navigate("Dettaglio", { book: item })}
@@ -59,7 +56,7 @@ export default function CategoryDetails({route,navigation}){
             <FlatList
                       data={libri}
                         keyExtractor={(item) => item.id.toString()}
-                        renderItem={renderItem}
+                        renderItem={bookComponent}
                         numColumns={2}
                         columnWrapperStyle={styleCategoryDetails.row}
                         contentContainerStyle={{ paddingBottom: 20 }}
