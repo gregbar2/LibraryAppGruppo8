@@ -4,6 +4,8 @@ import { View, Text, FlatList, Image, TouchableOpacity, ScrollView,Alert,StyleSh
 import styleCategoryDetails from './styles/styleCategoryDetails.js';
 import {caricaLibri} from './fileStorage.js';
 
+
+
 export default function CategoryDetails({route,navigation}){
     const {selCat} = route.params; /* categoria selezionata in categories.js */
 
@@ -17,7 +19,13 @@ export default function CategoryDetails({route,navigation}){
           };
           loadData();
         }, [])
-      );
+        );
+/*
+    const takeBook = () => {
+        const libriFiltrati = libri.filter(libro => libro.type === selCat);
+        return 
+    }*/
+    
 
     const renderItem = ({ item }) => (
          <TouchableOpacity
