@@ -13,24 +13,24 @@ export default stylesCategories = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 20
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   newCategoryButton: {
     backgroundColor: '#eef3ff',
     paddingVertical: 6,
     paddingHorizontal: 12,
-    borderRadius: 8,
+    borderRadius: 8
   },
   newCategoryText: {
     color: '#2563eb',
-    fontWeight: '500',
+    fontWeight: '500'
   },
   list: {
-    paddingBottom: 25,
+    paddingBottom: 25
   },
   categoryItem: {
     flexDirection: 'row',
@@ -40,11 +40,11 @@ export default stylesCategories = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e5e7eb',
     backgroundColor: '#fff',
-    marginBottom:12,
+    marginBottom:12
   },
   categoryText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   countText: {
     fontSize: 16,

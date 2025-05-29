@@ -5,7 +5,7 @@ const styleAddEditBook = StyleSheet.create({
       flex: 1,
       backgroundColor: '#ffffff',
       paddingHorizontal: 16,
-      paddingTop: 20,
+      paddingTop: 20
     },
     firstLabel:{
       fontSize: 16,
@@ -18,7 +18,7 @@ const styleAddEditBook = StyleSheet.create({
       fontSize: 16,
       marginBottom: 6,
       fontWeight: '500',
-      color: '#333',
+      color: '#333'
     },
     input: {
       borderWidth: 1,
@@ -28,11 +28,11 @@ const styleAddEditBook = StyleSheet.create({
       paddingVertical: 10,
       marginBottom: 16,
       fontSize: 14,
-      backgroundColor: '#fff',
+      backgroundColor: '#fff'
     },
     textarea: {
       height: 100,
-      textAlignVertical: 'top',
+      textAlignVertical: 'top'
     },
     imagePickerContainer: {
       borderWidth: 1,
@@ -42,12 +42,12 @@ const styleAddEditBook = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       height: 120,
-      marginBottom: 20,
+      marginBottom: 20
     },
     imagePickerText: {
       color: '#888',
       fontSize: 14,
-      marginTop: 8,
+      marginTop: 8
     },
     picker: {
       borderWidth: 1,
@@ -56,7 +56,7 @@ const styleAddEditBook = StyleSheet.create({
       marginBottom: 16,
       paddingHorizontal: 12,
       paddingVertical: 10,
-      backgroundColor: '#fff',
+      backgroundColor: '#fff'
     },
     saveButton: {
       backgroundColor: '#3366FF',
@@ -69,8 +69,8 @@ const styleAddEditBook = StyleSheet.create({
     saveButtonText: {
       color: '#ffffff',
       fontSize: 16,
-      fontWeight: 'bold',
-    },
+      fontWeight: 'bold'
+    }
   });
 
   export default styleAddEditBook;

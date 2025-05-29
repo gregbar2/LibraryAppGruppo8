@@ -18,7 +18,6 @@
           const libriAggiornati = libriSalvati.filter(libroSalvato => libroSalvato.id !== book.id); //prelevo tutti i libri escluso quello da modificare
           /* Crea il nuovo libro con i dati dallo stato */
           const nuovoLibro = {title: book.title,author: book.author,description: book.description,status: book.status,type: book.type, id: book.id,img: book.img,notes,rating,favourite: fav};
-            console.log(nuovoLibro);
           /* Aggiungi il nuovo libro alla lista esistente*/
           const nuoviLibri = [...libriAggiornati, nuovoLibro];
           
@@ -83,7 +82,7 @@
 
         const eliminaLibro = async (idDaEliminare) => {
 
-          const libriAggiornati = libri.filter(libro => libro.id !== idDaEliminare); //prelevo tutti i libri escluso quello da eliminare
+        const libriAggiornati = libri.filter(libro => libro.id !== idDaEliminare); //prelevo tutti i libri escluso quello da eliminare
 
           await salvaLibri(libriAggiornati); //sovrascrivo il file
           setLibri(libriAggiornati); //aggiorno il vettore dello stato

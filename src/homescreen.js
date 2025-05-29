@@ -37,10 +37,17 @@ export default function Homescreen({ navigation }) {
       <Text style={styleHomeScreen.sectionTitle}>Ultimi libri aggiunti</Text>
 
 
-    {/*libri.slice serve a far visualizzare solo gli utlimi 5 libri aggiunti.*/}
-    {/*faccio reverse() perchè così riesco a visualizzare i libri dal piu recente al meno recente*/}
+
       <View>
-         {libri.slice(-5).reverse().map((item) => (
+      {/*libri.slice serve a far visualizzare solo gli utlimi 5 libri aggiunti.*/}
+      {/*faccio reverse() perchè così riesco a visualizzare i libri dal piu recente al meno recente*/}
+      {/*Controllo per verificare se è presente almeno un libro, in caso negativo mi viene mostrato un mesaggio*/}
+       {libri.length === 0 ? (
+          <Text style={styleHomeScreen.placeholderText}>
+            La tua libreria è vuota!
+          </Text>
+        ) : (
+         libri.slice(-5).reverse().map((item) => (
              <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
 
                       <BookComponent
@@ -51,7 +58,8 @@ export default function Homescreen({ navigation }) {
                       />
 
               </TouchableOpacity>
-         ))}
+         ))
+       )}
       </View>
 
       <Text style={styleHomeScreen.sectionTitle}>Suggerimenti casuali</Text>
