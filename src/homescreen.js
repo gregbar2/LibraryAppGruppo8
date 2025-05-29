@@ -51,7 +51,7 @@ export default function Homescreen({ navigation }) {
                       />
 
               </TouchableOpacity>
-          ))}
+         ))}
       </View>
 
       <Text style={styleHomeScreen.sectionTitle}>Suggerimenti casuali</Text>
@@ -64,13 +64,17 @@ export default function Homescreen({ navigation }) {
 
        {/*visualizzo il vettore di libri generati casualmente*/}
        {suggestedBooksRandom.map((item) => (
+            <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
+
                 <BookSuggestion
                   key={item.id}
                   title={item.title}
                   author={item.author}
                   imageSource={item.img}
                 />
-              ))}
+
+            </TouchableOpacity>
+       ))}
        </ScrollView>
 
 
