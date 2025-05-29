@@ -22,7 +22,7 @@ export default function BookList({ navigation }) {
 const renderItem = ({ item }) => (
      <TouchableOpacity
        style={[styleAllBooks.bookItem, { flexDirection: 'row', alignItems: 'center' }]}
-       onPress={() => navigation.navigate('Dettaglio', { book: item })}
+       onPress={() => navigation.navigate("Dettaglio", { book: item })}
      >
        <View style={{ flex: 1 }}>
          <Text style={styleAllBooks.bookTitle}>{item.title}</Text>
