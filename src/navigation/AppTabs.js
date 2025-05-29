@@ -1,9 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity,Image } from 'react-native';
+import {Image } from 'react-native';
 import Categories from '../categories.js';
 import BookList from '../allBooks.js';
 import SearchScreen from '../searchScreen.js';
 import Settings from '../settings.js';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Homescreen from '../homescreen.js';
 
