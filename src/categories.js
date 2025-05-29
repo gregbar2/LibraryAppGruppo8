@@ -58,6 +58,7 @@ export default function Categories(){
     const handleCancel = () => { /* annulla l'operazione di inserimento */
         setVisible(false); //nascondo il Dialog
         setNewGenere(''); //svuoto il textInput
+        eliminaCategorie();
       };
       
       const handleAdd = async () => { /* quando clicco sul bottone 'Aggiungi' del Dialog aggiunge il Genere nel file e nel vettore degli stati per poi nostrare un nuovo categoryItem */

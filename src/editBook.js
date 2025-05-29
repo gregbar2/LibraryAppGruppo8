@@ -109,6 +109,4 @@ export default function EditBook({route, navigation}){
       );
 }
 
-
-/* categoria preferiti */
 /* eliminare una categoria */
