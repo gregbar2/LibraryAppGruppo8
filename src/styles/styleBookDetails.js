@@ -92,6 +92,11 @@ const styleBookDetail = StyleSheet.create({
         fontSize: 16,
         color: '#333',
         backgroundColor: '#fff'
+      },
+      ratingStar: { 
+        fontSize: 18, 
+        marginBottom: 0 , 
+        color:'gold' 
       }
   });
 

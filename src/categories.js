@@ -1,27 +1,26 @@
-import { View, Text, FlatList, Image, TouchableOpacity, ScrollView,Alert,StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import styleCategories from './styles/styleCategories';
 import { caricaLibri } from './fileStorage.js';
-import { salvaCategorie,caricaCategorie,eliminaCategorie } from './catStorage.js';
-import React, { useCallback, useEffect, useState } from 'react';
+import { salvaCategorie,caricaCategorie } from './catStorage.js';
+import { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import Dialog from 'react-native-dialog';
 
 
 export default function Categories({navigation}){
-    const [libri, setLibri] = useState([]); //vettore di libri per poter calcolare il numero di libri per categoria
-    const [categorie, setCategorie] = useState([]); //vettore di tutte le categorie/generi 
-    const [newGenere,setNewGenere] = useState(''); //nuovo genere appena inserito
-    const [visible, setVisible] = useState(false); // mostra/nasconde il dialog
+    const [libri, setLibri] = useState([]); 
+    const [categorie, setCategorie] = useState([]);  
+    const [newGenere,setNewGenere] = useState(''); 
+    const [visible, setVisible] = useState(false); 
 
     const eliminaCategoria = async ({genere}) => {
-        const categorieAggiornate = categorie.filter(cat => cat.categoria !== genere); //prelevo tutti i libri escluso quello da eliminare
+        const categorieAggiornate = categorie.filter(cat => cat.categoria !== genere); 
         await salvaCategorie(categorieAggiornate);
         setCategorie(categorieAggiornate);
 
     };
     
-    const MyCategoryItem = ({genere,number}) => { /* sono quelle che creiamo noi */
-        /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
+    const MyCategoryItem = ({genere,number}) => { 
         
         return (
             <View>
@@ -41,17 +40,16 @@ export default function Categories({navigation}){
             
         );
     };
-    const CategoryItem = ({genere,number}) => { /* categorie predefinite */
-        /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
+    const CategoryItem = ({genere,number}) => { 
         
         return (
             <View>
             <TouchableOpacity onPress={() => navigation.navigate("Dettaglio Categoria",{selCat: genere})} style={styleCategories.categoryItem}>
                 <Text style={styleCategories.categoryText}>{genere}</Text>
-                <View style={styleCategories.booksRow}>
+                
                 <Text style={styleCategories.countText}>{number()} books</Text>
             
-                </View>
+                
             </TouchableOpacity>
             </View>
             
@@ -59,7 +57,7 @@ export default function Categories({navigation}){
     };
 
   
-    useFocusEffect(/* viene eseguito ogni volta che da una pagina torniamo qui */
+    useFocusEffect(
         useCallback(() => {
           const loadData = async () => {
             const data = await caricaLibri();
@@ -72,7 +70,7 @@ export default function Categories({navigation}){
       );
 
 
-    const contaLibriGenere = (genere) => { //conto il numero di libri per genere
+    const contaLibriGenere = (genere) => { 
         let count=0;
         for(let i=0;i<libri.length;i++){
             if(libri[i].type === genere){
@@ -81,6 +79,7 @@ export default function Categories({navigation}){
         }
         return count;
     }
+
     const contaLibriPreferiti = () => {
         let count=0;
         for(let i=0;i<libri.length;i++){
@@ -91,38 +90,32 @@ export default function Categories({navigation}){
         }
         return count;
     }
-    const handleCancel = () => { /* annulla l'operazione di inserimento */
-        setVisible(false); //nascondo il Dialog
-        setNewGenere(''); //svuoto il textInput
-        eliminaCategorie();
+    const handleCancel = () => { 
+        setVisible(false); 
+        setNewGenere(''); 
       };
       
-      const handleAdd = async () => { /* quando clicco sul bottone 'Aggiungi' del Dialog aggiunge il Genere nel file e nel vettore degli stati per poi nostrare un nuovo categoryItem */
+      const handleAdd = async () => { 
         if(newGenere === ''){
             setVisible(false);
             Alert.alert('Inserire genere');
             return;
         }
         try {
-            /* Carica la lista di categorie già salvata (se presente) */
             const catSalvate = await caricaCategorie();
         
-            /* Crea la nuova categoria con i dati dallo stato */
-            const nuovaCat = {categoria: newGenere }; //popola
+            const nuovaCat = {categoria: newGenere }; 
         
-            /* Aggiunge la nuova categoria alla lista esistente */
-            const nuoveCat = [...catSalvate, nuovaCat];
+            catSalvate.push(nuovaCat);
+            await salvaCategorie(catSalvate);
         
-            /* Salva la lista aggiornata su file*/
-            await salvaCategorie(nuoveCat);
-        
-            setCategorie(nuoveCat); // necessaria perchè quando aggiungo una categoria e sto già nella pagina non viene aggiornato il vettore
+            setCategorie(catSalvate); 
             setVisible(false);
-            setNewGenere(''); //svuoto il TextInput
+            setNewGenere(''); 
         } catch (error) {
             console.error('Errore nel salvataggio del libro:', error);
             setVisible(false);
-            setNewGenere('');//svuoto il TextInput
+            setNewGenere('');
             
         }
       };
@@ -131,7 +124,7 @@ export default function Categories({navigation}){
         
         <ScrollView style={styleCategories.container}>
             <Dialog.Container visible={visible}>
-                {/* a cosa serve il Dialog?? */}
+                
             <Dialog.Title>Nuova Categoria</Dialog.Title>
             <Dialog.Description>Inserisci la nuova categoria</Dialog.Description>
             <Dialog.Input
@@ -158,8 +151,8 @@ export default function Categories({navigation}){
             <CategoryItem genere={'Comico'} number={() => contaLibriGenere('Comico')}/>
             <CategoryItem genere={'Dramma'} number={() => contaLibriGenere('Dramma')}/>
             <CategoryItem genere={'Poetico'} number={() => contaLibriGenere('Poetico')}/>
-        {categorie.map((cat, index) => (/* .map è una funzione che itera su ogni elemento dell'array categorie e restituisce un nuovo array di elementi React (in questo caso, CategoryItem). */
-          <MyCategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.categoria} number={() => contaLibriGenere(cat.categoria)} />
+        {categorie.map((cat, index) => (
+          <MyCategoryItem key={index} genere={cat.categoria} number={() => contaLibriGenere(cat.categoria)} />
         ))}
         </View>
         </ScrollView>

@@ -108,7 +108,7 @@ const BookComponent = ({ title, author, imageSource, status }) => {
       ? { uri: imageSource } 
       : require('../assets/default.jpg')} style={styleHomeScreen.bookImage} />
       <View style={styleHomeScreen.bookTextContainer}>
-        <Text style={styleHomeScreen.bookTitle}>{title}</Text>
+        <Text style={styleHomeScreen.bookTitle} >{title}</Text>
         <Text style={styleHomeScreen.bookAuthor}>{author}</Text>
       </View>
       <Text style={styleHomeScreen.bookStatus}>{status}</Text>

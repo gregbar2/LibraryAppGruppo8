@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Alert, TouchableOpacity } from 'react-native';
+import { Image, View, Alert, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-/* Platform serve per verificare se il dispositivo collegato è ANDROID o IOS  */
+
 export default function ImagePickerComponent({onImagePicked,img }) {
   const [imageUri, setImageUri] = useState(img);
 
-  useEffect(() => { /* viene eseguito una sola volta all'avvio dell'app e richiede l'accesso alla galleria al dispositivo */
+  useEffect(() => { /* viene eseguito una sola volta all'avvio dell'app e richiede l'accesso alla galleria del dispositivo */
     (async () => { /* funzione/effetto collaterale da eseguire quanod viene renderizzato il componente la prima volta */
         const permission  = await ImagePicker.requestMediaLibraryPermissionsAsync(); /* metodo per richiedere i permessi */
         if (permission.status !== 'granted') {

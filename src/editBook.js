@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView,Alert } from 'react-native';
+import {  Text, TouchableOpacity, TextInput, Image, ScrollView,Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import ImagePickerComponent from './imagePickerComponent.js';
 import styleAddEditBook from './styles/styleAddEdit';
@@ -20,20 +20,15 @@ export default function EditBook({route, navigation}){
 
     const modificaLibro = async() => {
       try {
-        /* Carica la lista libri già salvata (se presente) */
         const libriSalvati = await caricaLibri();
         
-        const libriAggiornati = libriSalvati.filter(libroSalvato => libroSalvato.id !== libro.id); //prelevo tutti i libri escluso quello da modificare
-        /* Crea il nuovo libro con i dati dallo stato */
+        const libriAggiornati = libriSalvati.filter(libroSalvato => libroSalvato.id !== libro.id); 
+        
         const nuovoLibro = { title, author, description, status, type, id: libro.id,img,notes,rating,favourite};
     
-        /* Aggiungi il nuovo libro alla lista esistente*/
-        const nuoviLibri = [...libriAggiornati, nuovoLibro];
-        
-        /* Salva la lista aggiornata su file*/
-        await salvaLibri(nuoviLibri);
+        libriAggiornati.push(nuovoLibro);
+        await salvaLibri(libriAggiornati);
 
-        /* Eventualmente, puoi navigare indietro o resettare il form qui*/
         navigation.popToTop();
       } catch (error) {
         console.error('Errore nel salvataggio del libro:', error);
@@ -108,7 +103,3 @@ export default function EditBook({route, navigation}){
         </ScrollView>
       );
 }
-
-/* eliminare una categoria */
-/* settingScreen */
-/* clicchi su una categoria e ti mostra la lista dei libri */

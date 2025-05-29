@@ -3,9 +3,9 @@ import * as FileSystem from 'expo-file-system';
 const FILE_URI = FileSystem.documentDirectory + 'categorie.json';
 
 // Funzione per salvare i dati
-export const salvaCategorie = async (libri) => {
+export const salvaCategorie = async (categorie) => {
   try {
-    const jsonValue = JSON.stringify(libri);
+    const jsonValue = JSON.stringify(categorie);
     await FileSystem.writeAsStringAsync(FILE_URI, jsonValue);
   } catch (e) {
     console.error('Errore nel salvataggio delle Categorie:', e);
@@ -27,7 +27,7 @@ export const caricaCategorie = async () => {
   }
 };
 
-export const eliminaCategorie = async () => { /* pagina impostazioni per eliminare categorie e libri */
+export const eliminaCategorie = async () => { /* pagina impostazioni per eliminare categorie e categorie */
     try {
       await FileSystem.writeAsStringAsync(FILE_URI, '[]'); // un array vuoto come JSON
       console.log('Categorie svuotate con successo');

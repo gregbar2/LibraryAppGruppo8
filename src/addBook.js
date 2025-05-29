@@ -24,10 +24,9 @@ const salvaLibro = async () => {
     const nuovoLibro = { title, author, description, status, type, id: Date.now().toString(),img ,notes: '',rating: '' ,favourite: 'false'};
     
     /* Aggiungi il nuovo libro alla lista esistente*/
-    const nuoviLibri = [...libriSalvati, nuovoLibro];
-
+    libriSalvati.push(nuovoLibro);
     /* Salva la lista aggiornata su file*/
-    await salvaLibri(nuoviLibri);
+    await salvaLibri(libriSalvati);
 
     /* Eventualmente, puoi navigare indietro o resettare il form qui*/
      navigation.goBack();
