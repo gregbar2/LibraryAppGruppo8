@@ -22,7 +22,7 @@ const salvaLibro = async () => {
 
     /* Crea il nuovo libro con i dati dallo stato */
     const nuovoLibro = { title, author, description, status, type, id: Date.now().toString(),img ,notes: '',rating: '' ,favourite: 'false'};
-
+    
     /* Aggiungi il nuovo libro alla lista esistente*/
     const nuoviLibri = [...libriSalvati, nuovoLibro];
 

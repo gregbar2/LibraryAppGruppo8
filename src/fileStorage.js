@@ -36,3 +36,25 @@ export const eliminaLibri = async () => { /* pagina impostazioni per eliminare c
     console.error('Errore nella pulizia dei libri:', e);
   }
 };
+
+/*const libri = []; 
+export const caricoLibriRandom = async () => {
+  for (let i = 0; i < 30; i++) {
+    const libro = {
+      title: 'titolo' + i,
+      author: 'autore' + i,
+      description: 'descrizione' + i,
+      status: 'status' + i,
+      type: 'type' + i,
+      id: Date.now().toString() + i, // Aggiungo i per evitare duplicati
+      notes: '',
+      rating: '',
+      favourite: 'false'
+    };
+    libri.push(libro);
+  }
+  await salvaLibri(libri);
+  return libri;
+};
+
+*/
