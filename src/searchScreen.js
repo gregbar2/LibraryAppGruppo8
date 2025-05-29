@@ -3,7 +3,7 @@ import {StyleSheet,View,Image,Text,TextInput,TouchableOpacity,FlatList} from 're
 import { useFocusEffect } from '@react-navigation/native';
 import { caricaLibri } from './fileStorage';
 
-export default function SearchScreen() {
+export default function SearchScreen({navigation}) {
   const [books, setBooks] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [stato, setStato] = useState('');
@@ -98,7 +98,7 @@ export default function SearchScreen() {
         data={filteredBooks}
         keyExtractor={(item, index) => item.title + index}
         renderItem={({ item }) => (
-          <View style={styleSearchScreen.bookItem}>
+        <TouchableOpacity key={item.id} onPress={()=>navigation.navigate("Dettaglio", { book: item })}>
             <Image
               source={item.img ? { uri: item.img } : require('../assets/default.jpg')}
               style={styleSearchScreen.bookCover}
@@ -108,7 +108,7 @@ export default function SearchScreen() {
               <Text style={styleSearchScreen.bookAuthor}>{item.author}</Text>
               <Text style={styleSearchScreen.bookGenre}>{item.genere || item.genre}</Text>
             </View>
-          </View>
+          </TouchableOpacity> 
         )}
       />
     </View>
