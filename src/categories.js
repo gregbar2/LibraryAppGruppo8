@@ -7,7 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import Dialog from 'react-native-dialog';
 
 
-export default function Categories(){
+export default function Categories({navigation}){
     const [libri, setLibri] = useState([]); //vettore di libri per poter calcolare il numero di libri per categoria
     const [categorie, setCategorie] = useState([]); //vettore di tutte le categorie/generi 
     const [newGenere,setNewGenere] = useState(''); //nuovo genere appena inserito
@@ -24,14 +24,19 @@ export default function Categories(){
         /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
         
         return (
-            <View style={styleCategories.categoryItem}>
-            <Text style={styleCategories.categoryText}>{genere}</Text>
-            <View style={styleCategories.booksRow}>
-            <Text style={styleCategories.countText}>{number()} books</Text>
-            <TouchableOpacity onPress={() => eliminaCategoria({genere})}>
-                <Image source={require('../assets/delCat.png')} style={styleCategories.iconStyle}  />
-            </TouchableOpacity>
-            </View>
+            <View>
+                
+                <TouchableOpacity onPress={() => navigation.navigate("Dettaglio Categoria",{selCat: genere})} style={styleCategories.categoryItem}>
+                <Text style={styleCategories.categoryText}>{genere}</Text>
+                
+                    <View style={styleCategories.booksRow}>
+                        <Text style={styleCategories.countText}>{number()} books</Text>
+                        
+                        <TouchableOpacity onPress={() => eliminaCategoria({genere})}>
+                            <Image source={require('../assets/delCat.png')} style={styleCategories.iconStyle}  />
+                        </TouchableOpacity>
+                    </View>
+                    </TouchableOpacity>
             </View>
             
         );
@@ -40,12 +45,14 @@ export default function Categories(){
         /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
         
         return (
-            <View style={styleCategories.categoryItem}>
-            <Text style={styleCategories.categoryText}>{genere}</Text>
-            <View style={styleCategories.booksRow}>
-            <Text style={styleCategories.countText}>{number()} books</Text>
+            <View>
+            <TouchableOpacity onPress={() => navigation.navigate("Dettaglio Categoria",{selCat: genere})} style={styleCategories.categoryItem}>
+                <Text style={styleCategories.categoryText}>{genere}</Text>
+                <View style={styleCategories.booksRow}>
+                <Text style={styleCategories.countText}>{number()} books</Text>
             
-            </View>
+                </View>
+            </TouchableOpacity>
             </View>
             
         );
