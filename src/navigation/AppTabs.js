@@ -31,7 +31,17 @@ export default function AppTabs() {
       tabBarStyle: routeName === 'Home' ? undefined : { display: 'none' }, /* controllo per nascondere la tabBar  */
     };
   }}/>
-      <Tab.Screen name="Ricerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
+      <Tab.Screen name="La mia libreria" component={BookList} options={{tabBarIcon: ({ focused }) => (
+                      <Image
+                        source={require('../../assets/tabIcon/library.png')}
+                        style={{
+                          width: 30,
+                          height: 30,
+                        }}
+                      />
+          ) }}/>
+          
+          <Tab.Screen name="Ricerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
             <Image
               source={require('../../assets/tabIcon/searchIcon.png')}
               style={{ 
@@ -49,16 +59,6 @@ export default function AppTabs() {
                 height: 30,
               }}
             />
-          ) }}/>
-
-          <Tab.Screen name="La mia libreria" component={BookList} options={{tabBarIcon: ({ focused }) => (
-                      <Image
-                        source={require('../../assets/tabIcon/library.png')}
-                        style={{
-                          width: 30,
-                          height: 30,
-                        }}
-                      />
           ) }}/>
 
           <Tab.Screen name="Impostazioni" component={Settings} options={{tabBarIcon: ({ focused }) => (
