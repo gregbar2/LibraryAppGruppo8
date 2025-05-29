@@ -140,7 +140,7 @@
                       <TouchableOpacity style={styleBookDetail.topRightButton} onPress={() => eliminaLibro(book.id)}>
                       <Image source={require('../assets/trash.png')} style={styleBookDetail.icondx} />
                       </TouchableOpacity>
-                      <TouchableOpacity style={styleBookDetail.topLeftButton} onPress={()=>navigation.navigate("Modifica Libro", { book: book })}>
+                      <TouchableOpacity style={styleBookDetail.topLeftButton} onPress={()=>navigation.navigate("Modifica Libro", { libro: book })}>
                       <Image source={require('../assets/pencil.png')} style={styleBookDetail.iconsx} />
                       </TouchableOpacity>
                 </ScrollView>

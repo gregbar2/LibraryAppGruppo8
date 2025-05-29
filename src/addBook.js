@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView,Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import ImagePickerComponent from './imagePickerComponent.js';
 import styleAddEditBook from './styles/styleAddEdit';
 import { salvaLibri, caricaLibri } from './fileStorage';
-import { Alert } from 'react-native';
+
 
 export default function AddEdit({ navigation }) {
   // Stati per i campi del form
@@ -37,7 +37,7 @@ const salvaLibro = async () => {
 
 };
   const controlloInserimenti = () => {
-      if(title != '' && author != '' && description != '' && type != ''){
+      if(title.trim() != '' && author.trim() != '' && description.trim() != '' && type.trim() != ''){
         
         return true;
       }else{
@@ -86,7 +86,7 @@ const salvaLibro = async () => {
         <Picker.Item label='Da leggere' value='Da leggere' />
         <Picker.Item label='Letto' value='Letto' />
         <Picker.Item label='In lettura' value='In lettura' />
-        <Picker.Item label='---' value='' />
+        
       </Picker>
 
       <Text style={styleAddEditBook.label}>Genere</Text>
