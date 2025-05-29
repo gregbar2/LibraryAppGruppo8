@@ -109,7 +109,6 @@ export default function Categories(){
             /* Salva la lista aggiornata su file*/
             await salvaCategorie(nuoveCat);
         
-            console.log('Categoria salvata con successo:', nuovaCat);
             setCategorie(nuoveCat); // necessaria perchè quando aggiungo una categoria e sto già nella pagina non viene aggiornato il vettore
             setVisible(false);
             setNewGenere(''); //svuoto il TextInput
@@ -153,7 +152,7 @@ export default function Categories(){
             <CategoryItem genere={'Dramma'} number={() => contaLibriGenere('Dramma')}/>
             <CategoryItem genere={'Poetico'} number={() => contaLibriGenere('Poetico')}/>
         {categorie.map((cat, index) => (/* .map è una funzione che itera su ogni elemento dell'array categorie e restituisce un nuovo array di elementi React (in questo caso, CategoryItem). */
-          <MyCategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.categoria} number={() => contaLibriGenere(cat.newGenere)} />
+          <MyCategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.categoria} number={() => contaLibriGenere(cat.categoria)} />
         ))}
         </View>
         </ScrollView>
