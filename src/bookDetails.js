@@ -7,7 +7,30 @@
   export default function BookDetails({route, navigation}) {
 
       const { book } = route.params;
-
+      const [notes, setNotes] = useState(book.notes);
+      const [rating, setRating] = useState(book.rating);
+      const [libri, setLibri] = useState([]);
+      const aggiungiPreferiti = async (fav) =>{
+        try {
+          /* Carica la lista libri già salvata (se presente) */
+          const libriSalvati = await caricaLibri();
+          
+          const libriAggiornati = libriSalvati.filter(libroSalvato => libroSalvato.id !== book.id); //prelevo tutti i libri escluso quello da modificare
+          /* Crea il nuovo libro con i dati dallo stato */
+          const nuovoLibro = {title: book.title,author: book.author,description: book.description,status: book.status,type: book.type, id: book.id,img: book.img,notes,rating,favourite: fav};
+            console.log(nuovoLibro);
+          /* Aggiungi il nuovo libro alla lista esistente*/
+          const nuoviLibri = [...libriAggiornati, nuovoLibro];
+          
+          /* Salva la lista aggiornata su file*/
+          await salvaLibri(nuoviLibri);
+  
+          /* Eventualmente, puoi navigare indietro o resettare il form qui*/
+          navigation.popToTop();
+        } catch (error) {
+          console.error('Errore nel salvataggio del libro:', error);
+        }
+      };
 
       if (!book) {
         return (
@@ -17,9 +40,7 @@
         );
       }
 
-      const [notes, setNotes] = useState(book.notes);
-      const [rating, setRating] = useState(book.rating);
-      const [libri, setLibri] = useState([]);
+      
 
         useEffect(() => {
           async function loadLibri() {
@@ -134,8 +155,8 @@
                       
                       
                     {/*Bottone + Stile del bottone*/}
-                      <TouchableOpacity style={styleBookDetail.addButton}>
-                          <Text style={styleBookDetail.addButtonText}>+ Aggiungi ai preferiti</Text>
+                      <TouchableOpacity style={styleBookDetail.addButton} onPress={() => aggiungiPreferiti(book.favourite === 'false' ? 'true' : 'false')}>
+                          <Text style={styleBookDetail.addButtonText}>{book.favourite === 'false' ? "+ Aggiungi ai preferiti" : "- Rimuovi dai preferiti"}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity style={styleBookDetail.topRightButton} onPress={() => eliminaLibro(book.id)}>
                       <Image source={require('../assets/trash.png')} style={styleBookDetail.icondx} />

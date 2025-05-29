@@ -45,7 +45,16 @@ export default function Categories(){
         }
         return count;
     }
-    
+    const contaLibriPreferiti = () => {
+        let count=0;
+        for(let i=0;i<libri.length;i++){
+            if(libri[i].favourite === 'true'){
+                count++;
+            }
+
+        }
+        return count;
+    }
     const handleCancel = () => { /* annulla l'operazione di inserimento */
         setVisible(false); //nascondo il Dialog
         setNewGenere(''); //svuoto il textInput
@@ -107,6 +116,12 @@ export default function Categories(){
 
         </View>
         <View style={styleCategories.list} >
+            <CategoryItem genere={'Preferiti'} number={() => contaLibriPreferiti()}/>
+            <CategoryItem genere={'Romanzo'} number={() => contaLibriGenere('Romanzo')}/>
+            <CategoryItem genere={'Fantasy'} number={() => contaLibriGenere('Fantasy')}/>
+            <CategoryItem genere={'Comico'} number={() => contaLibriGenere('Comico')}/>
+            <CategoryItem genere={'Dramma'} number={() => contaLibriGenere('Dramma')}/>
+            <CategoryItem genere={'Poetico'} number={() => contaLibriGenere('Poetico')}/>
         {categorie.map((cat, index) => (/* .map è una funzione che itera su ogni elemento dell'array categorie e restituisce un nuovo array di elementi React (in questo caso, CategoryItem). */
           <CategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.newGenere} number={() => contaLibriGenere(cat.newGenere)} />
         ))}

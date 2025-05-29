@@ -13,6 +13,9 @@ export default function EditBook({route, navigation}){
     const [status, setStatus] = useState(libro.status); 
     const [type, setType] = useState(libro.type);
     const [img,setImg] = useState(libro.img);
+    const notes = libro.notes;
+    const rating = libro.rating;
+    const favourite = libro.favourite;
     const idLibro = libro.id;
 
     const modificaLibro = async() => {
@@ -22,7 +25,7 @@ export default function EditBook({route, navigation}){
         
         const libriAggiornati = libriSalvati.filter(libroSalvato => libroSalvato.id !== libro.id); //prelevo tutti i libri escluso quello da modificare
         /* Crea il nuovo libro con i dati dallo stato */
-        const nuovoLibro = { title, author, description, status, type, id: libro.id,img};
+        const nuovoLibro = { title, author, description, status, type, id: libro.id,img,notes,rating,favourite};
     
         /* Aggiungi il nuovo libro alla lista esistente*/
         const nuoviLibri = [...libriAggiornati, nuovoLibro];
@@ -109,4 +112,3 @@ export default function EditBook({route, navigation}){
 
 /* categoria preferiti */
 /* eliminare una categoria */
-/* far si che da tutti i posti in cui stanno i libri si possano cliccare e andare al dettaglio */
