@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styleHomeScreen from './styles/styleHomeScreen';
-import { salvaLibri, caricaLibri,eliminaLibri } from './fileStorage'; //importo il modulo per la persistenza
+import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
 import { useFocusEffect } from '@react-navigation/native';
 
 
@@ -92,9 +92,6 @@ export default function Homescreen({ navigation }) {
         <Text style={styleHomeScreen.addButtonText} >+ Aggiungi nuovo libro</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={eliminaLibri} style={{ padding: 10, backgroundColor: 'red', margin: 10 }}>
-              <Text style={{ color: 'white', textAlign: 'center' }}>Svuota tutti i libri</Text>
-       </TouchableOpacity>
 
 
     </ScrollView>

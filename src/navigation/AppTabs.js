@@ -3,6 +3,7 @@ import MoveToDetails from './moveToDetails.js';
 import Categories from '../categories.js';
 import BookList from '../allBooks.js';
 import SearchScreen from '../searchScreen.js';
+import Settings from '../settings.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -58,6 +59,16 @@ export default function AppTabs() {
                           height: 30,
                         }}
                       />
+          ) }}/>
+
+          <Tab.Screen name="Impostazioni" component={Settings} options={{tabBarIcon: ({ focused }) => (
+                                <Image
+                                  source={require('../../assets/tabIcon/settingsIcon.png')}
+                                  style={{
+                                    width: 30,
+                                    height: 30,
+                                  }}
+                                />
           ) }}/>
           
     </Tab.Navigator>
