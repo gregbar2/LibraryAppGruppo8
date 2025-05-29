@@ -50,5 +50,15 @@ export default stylesCategories = StyleSheet.create({
     fontSize: 16,
     color: '#6b7280',
   },
+  booksRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  
+  iconStyle: {
+    width: 20,
+    height: 20,
+    marginLeft: 6, // avvicina l’icona al testo
+  },
 });
 

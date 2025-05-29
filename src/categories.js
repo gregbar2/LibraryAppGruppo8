@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, TouchableOpacity, ScrollView,Alert } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, ScrollView,Alert,StyleSheet } from 'react-native';
 import styleCategories from './styles/styleCategories';
 import { caricaLibri } from './fileStorage.js';
 import { salvaCategorie,caricaCategorie,eliminaCategorie } from './catStorage.js';
@@ -6,15 +6,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import Dialog from 'react-native-dialog';
 
-const CategoryItem = ({genere,number}) => {
-    /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
-    return (
-        <View style={styleCategories.categoryItem}>
-        <Text>{genere}</Text>
-        <Text style={styleCategories.countText}>{number()} books</Text>
-        </View>
-    );
-}
 
 export default function Categories(){
     const [libri, setLibri] = useState([]); //vettore di libri per poter calcolare il numero di libri per categoria
@@ -22,6 +13,45 @@ export default function Categories(){
     const [newGenere,setNewGenere] = useState(''); //nuovo genere appena inserito
     const [visible, setVisible] = useState(false); // mostra/nasconde il dialog
 
+    const eliminaCategoria = async ({genere}) => {
+        const categorieAggiornate = categorie.filter(cat => cat.categoria !== genere); //prelevo tutti i libri escluso quello da eliminare
+        await salvaCategorie(categorieAggiornate);
+        setCategorie(categorieAggiornate);
+
+    };
+    
+    const MyCategoryItem = ({genere,number}) => { /* sono quelle che creiamo noi */
+        /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
+        
+        return (
+            <View style={styleCategories.categoryItem}>
+            <Text style={styleCategories.categoryText}>{genere}</Text>
+            <View style={styleCategories.booksRow}>
+            <Text style={styleCategories.countText}>{number()} books</Text>
+            <TouchableOpacity onPress={() => eliminaCategoria({genere})}>
+                <Image source={require('../assets/delCat.png')} style={styleCategories.iconStyle}  />
+            </TouchableOpacity>
+            </View>
+            </View>
+            
+        );
+    };
+    const CategoryItem = ({genere,number}) => { /* categorie predefinite */
+        /* genere e number sono le props che passo a CategoryItem quando le richiamo  */
+        
+        return (
+            <View style={styleCategories.categoryItem}>
+            <Text style={styleCategories.categoryText}>{genere}</Text>
+            <View style={styleCategories.booksRow}>
+            <Text style={styleCategories.countText}>{number()} books</Text>
+            
+            </View>
+            </View>
+            
+        );
+    };
+
+  
     useFocusEffect(/* viene eseguito ogni volta che da una pagina torniamo qui */
         useCallback(() => {
           const loadData = async () => {
@@ -41,7 +71,6 @@ export default function Categories(){
             if(libri[i].type === genere){
                 count++;
             }
-
         }
         return count;
     }
@@ -72,7 +101,7 @@ export default function Categories(){
             const catSalvate = await caricaCategorie();
         
             /* Crea la nuova categoria con i dati dallo stato */
-            const nuovaCat = {newGenere }; //popola
+            const nuovaCat = {categoria: newGenere }; //popola
         
             /* Aggiunge la nuova categoria alla lista esistente */
             const nuoveCat = [...catSalvate, nuovaCat];
@@ -124,7 +153,7 @@ export default function Categories(){
             <CategoryItem genere={'Dramma'} number={() => contaLibriGenere('Dramma')}/>
             <CategoryItem genere={'Poetico'} number={() => contaLibriGenere('Poetico')}/>
         {categorie.map((cat, index) => (/* .map è una funzione che itera su ogni elemento dell'array categorie e restituisce un nuovo array di elementi React (in questo caso, CategoryItem). */
-          <CategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.newGenere} number={() => contaLibriGenere(cat.newGenere)} />
+          <MyCategoryItem key={index/* rn richiede un identif per ogni elemento uso l'indice del vettore categorie */} genere={cat.categoria} number={() => contaLibriGenere(cat.newGenere)} />
         ))}
         </View>
         </ScrollView>

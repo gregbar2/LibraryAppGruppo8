@@ -32,13 +32,7 @@
         }
       };
 
-      if (!book) {
-        return (
-          <View>
-            <Text>Errore: nessun libro fornito</Text>
-          </View>
-        );
-      }
+
 
       
 

@@ -110,3 +110,5 @@ export default function EditBook({route, navigation}){
 }
 
 /* eliminare una categoria */
+/* settingScreen */
+/* clicchi su una categoria e ti mostra la lista dei libri */
