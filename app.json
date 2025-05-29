@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "gruppo8",
+    "name": "Library App",
     "slug": "gruppo8",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/delCat.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
