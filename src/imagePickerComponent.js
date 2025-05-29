@@ -41,7 +41,7 @@ export default function ImagePickerComponent({onImagePicked,img }) {
       {imageUri && (<TouchableOpacity onPress={pickImage}>
         <Image
           source={{ uri: imageUri }}
-          style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }}
+          style={{ width: 100, height: 100, marginTop: 20, borderRadius: 10 }}
         /></TouchableOpacity>
       )/* questo blocco tra {} prende il nome di blocco condizionale, il suo comportamento è che se imageUri è != null o undefined allora mostra il componente <Image> altrimenti non mostra nulla */}
     </View>
