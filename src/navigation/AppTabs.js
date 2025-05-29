@@ -31,7 +31,7 @@ export default function AppTabs() {
       tabBarStyle: routeName === 'Home' ? undefined : { display: 'none' }, /* controllo per nascondere la tabBar  */
     };
   }}/>
-      <Tab.Screen name="Cerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
+      <Tab.Screen name="Ricerca" component={SearchScreen} options={{ tabBarIcon: ({ focused }) => (
             <Image
               source={require('../../assets/tabIcon/searchIcon.png')}
               style={{ 

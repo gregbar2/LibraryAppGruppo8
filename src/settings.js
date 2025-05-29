@@ -7,7 +7,6 @@ export default function Settings({ navigation }){
 
     return(
          <View style={styleSettings.container}>
-            <Text style={styleSettings.title}>Impostazioni</Text>
 
             <View style={styleSettings.buttonContainer}>
              <TouchableOpacity style={[styleSettings.button, styleSettings.danger]}  onPress={eliminaLibri}>

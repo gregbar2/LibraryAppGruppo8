@@ -56,7 +56,6 @@ export default function SearchScreen() {
 
   return (
     <View style={styleSearchScreen.container}>
-      <Text style={styleSearchScreen.title}>Ricerca</Text>
 
       <TextInput
         style={styleSearchScreen.searchInput}

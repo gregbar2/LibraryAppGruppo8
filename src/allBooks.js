@@ -50,8 +50,11 @@ const renderItem = ({ item }) => (
       <View style={styleAllBooks.container}>
         <FlatList
           data={libri}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderItem}
+            numColumns={2}
+            columnWrapperStyle={styleAllBooks.row}
+            contentContainerStyle={{ paddingBottom: 20 }}
         />
       </View>
     );
