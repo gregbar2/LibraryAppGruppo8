@@ -114,11 +114,11 @@
                       {/*Stile della copertina del libro*/}
 
                       <Text style={styleBookDetail.sectionTitle}>Trama</Text>
-                      <Text style={styleBookDetail.description}>{book.description || 'Nessuna trama disponibile'}</Text> 
+                      <Text style={styleBookDetail.description}>{book.description}</Text> 
                       {/*Stile della trama*/}
           
                       <Text style={styleBookDetail.sectionTitle}>Stato</Text>
-                      <Text style={styleBookDetail.status}>{book.status || 'Nessuno stato disponibile'}</Text>
+                      <Text style={styleBookDetail.status}>{book.status}</Text>
                       {/*Stile dello stato*/}
                         
                         
