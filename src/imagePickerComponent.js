@@ -21,7 +21,7 @@ export default function ImagePickerComponent({onImagePicked,img }) {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: 'images', // Solo immagini
         allowsEditing: true, // Permette il crop
-        aspect: [2, 3], // Proporzioni del crop (facoltativo)
+        aspect: [9, 16], // Proporzioni del crop (facoltativo)
         quality: 1, // Qualità massima
       });
 
