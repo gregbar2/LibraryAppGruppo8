@@ -1,7 +1,7 @@
   import { ScrollView, Text,TextInput, Image, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
   import { useState, useEffect } from 'react';
   import styleBookDetail from './styles/styleBookDetails';
-  import { salvaLibri, caricaLibri } from './fileStorage'; //importo il modulo per la persistenza
+  import { salvaLibri, caricaLibri } from './fileStorage'; 
 
 
   export default function BookDetails({route, navigation}) {

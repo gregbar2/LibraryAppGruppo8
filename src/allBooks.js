@@ -1,8 +1,8 @@
 import { useState, useCallback} from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { caricaLibri } from './fileStorage'; // la tua funzione di caricamento
-import styleAllBooks from './styles/styleAllBooks'; // tuo stile personalizzato
+import { caricaLibri } from './fileStorage'; 
+import styleAllBooks from './styles/styleAllBooks';
 
 
 export default function BookList({ navigation }) {

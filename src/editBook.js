@@ -74,8 +74,7 @@ export default function EditBook({route, navigation}){
           />
     
           <Text style={styleAddEditBook.label}>Copertina</Text>
-          <ImagePickerComponent onImagePicked={(uri) => setImg(uri)} img={libro.img /* passo l'uri dell'immagine*/} /> 
-    {/* noi creiamo il componente imagePicker in addEdit e associamo questa funzione anonima che viene eseguita ogni volta da imagePickerComponent all'interno dell' IF che salva lo stato */}
+          <ImagePickerComponent onImagePicked={(uri) => setImg(uri)} img={libro.img } /> 
           <Text style={styleAddEditBook.label}>Stato</Text>
           <Picker
             style={styleAddEditBook.picker}

@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Homescreen from '../homescreen.js';
 
 
-// Inizializzo il Tab Navigator, tab con le icone che ci permettono di accedere direttamente alle pagine dell'app
 const Tab = createBottomTabNavigator();
 
 export default function AppTabs() {
